@@ -1,0 +1,105 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        display: ['-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+      },
+      colors: {
+        apple: {
+          blue: '#0071e3',
+          blueHover: '#0077ed',
+          blueLight: '#e8f0fe',
+          gray: '#86868b',
+          grayLight: '#f5f5f7',
+          grayDark: '#1d1d1f',
+          grayDarker: '#1d1d1f',
+          white: '#ffffff',
+          black: '#1d1d1f',
+          separator: '#d2d2d7',
+          separatorDark: '#424245',
+        },
+      },
+      fontSize: {
+        'display-1': ['80px', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'display-2': ['56px', { lineHeight: '1.1', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'display-3': ['40px', { lineHeight: '1.15', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'title-1': ['32px', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'title-2': ['28px', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '600' }],
+        'title-3': ['24px', { lineHeight: '1.25', letterSpacing: '-0.01em', fontWeight: '600' }],
+        'headline': ['17px', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '600' }],
+        'body': ['17px', { lineHeight: '1.5', letterSpacing: '-0.01em', fontWeight: '400' }],
+        'body-bold': ['17px', { lineHeight: '1.5', letterSpacing: '-0.01em', fontWeight: '600' }],
+        'callout': ['16px', { lineHeight: '1.5', letterSpacing: '-0.01em', fontWeight: '400' }],
+        'footnote': ['13px', { lineHeight: '1.4', letterSpacing: '-0.01em', fontWeight: '400' }],
+        'caption-1': ['12px', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '400' }],
+        'caption-2': ['11px', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '400' }],
+      },
+      spacing: {
+        '0': '0',
+        '1': '4px',
+        '2': '8px',
+        '3': '12px',
+        '4': '16px',
+        '5': '20px',
+        '6': '24px',
+        '7': '28px',
+        '8': '32px',
+        '9': '36px',
+        '10': '40px',
+        '12': '48px',
+        '14': '56px',
+        '16': '64px',
+        '20': '80px',
+        '24': '96px',
+        '28': '112px',
+        '32': '128px',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
+        'slide-up': 'slideUp 0.8s ease-out forwards',
+        'slide-down': 'slideDown 0.8s ease-out forwards',
+        'scale-in': 'scaleIn 0.5s ease-out forwards',
+        'blur-in': 'blurIn 0.8s ease-out forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(40px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideDown: {
+          '0%': { opacity: '0', transform: 'translateY(-40px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        blurIn: {
+          '0%': { opacity: '0', filter: 'blur(20px)' },
+          '100%': { opacity: '1', filter: 'blur(0)' },
+        },
+      },
+      transitionTimingFunction: {
+        'apple': 'cubic-bezier(0.42, 0, 0.58, 1)',
+        'apple-spring': 'cubic-bezier(0.4, 0.0, 0.2, 1)',
+      },
+      transitionDuration: {
+        'fast': '150ms',
+        'normal': '250ms',
+        'slow': '400ms',
+        'slower': '600ms',
+      },
+    },
+  },
+  plugins: [],
+}

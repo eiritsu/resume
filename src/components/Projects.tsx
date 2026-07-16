@@ -115,6 +115,26 @@ const projects: Project[] = [
     highlights: ['70%+时间节省', '高准确率识别'],
   },
   {
+    title: 'Google Patants 本地知识库构建',
+    period: '2026.02 - 2026.03',
+    color: 'teal',
+    techStack: 'SQLite / 树形Wiki架构 / 全文检索 / 增量同步',
+    role: '主导开发',
+    description:
+      '基于Google Patants公开数据，搭建企业本地Patents知识库，主动放弃向量数据库方案改用树形结构Wiki架构。',
+    responsibilities: [
+      '调研并测试RAG向量数据库方案，发现向量召回误差大、上下文关联性差，主动放弃改用树形结构Wiki架构',
+      '设计树形分类目录（按行业→区域→合作伙伴层级），完成Google Patants数据的结构化清洗与入库',
+      '基于SQLite实现本地轻量化存储，开发增删改查与全文检索接口',
+      '编写数据更新脚本，实现Patents数据的定期同步与增量更新',
+    ],
+    achievements: [
+      '树形结构检索准确率较向量方案提升显著，业务查询命中率从约60%提升至95%+',
+      'SQLite本地部署零外部依赖，查询响应时间<200ms',
+    ],
+    highlights: ['95%+查询命中率', '<200ms响应', '零外部依赖'],
+  },
+  {
     title: 'AI会议纪要总结',
     period: '2026.03 - 2026.06',
     color: 'green',

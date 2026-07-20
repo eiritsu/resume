@@ -155,6 +155,29 @@ const projects: Project[] = [
     github: 'https://github.com/eiritsu/meeting-minutes-interview',
   },
   {
+    title: 'Hermes Wiki — AI Agent会话知识库插件',
+    period: '2026.07',
+    color: 'indigo',
+    techStack: 'Python / JavaScript / SQLite / LLM / Obsidian Markdown / 7语言i18n',
+    role: '独立开发并开源',
+    description:
+      '基于Karpathy LLM Wiki模式，为Hermes AI Agent开发的会话知识库插件。自动将AI会话转为Obsidian风格Wiki页面，支持质量评分、主题分类、实体提取，含Desktop侧边栏GUI和Gateway RPC后端。',
+    responsibilities: [
+      '设计双模式架构：Extension模式（与Holographic Memory共享连接）和Standalone模式（独立SQLite存储）',
+      '开发LLM驱动的会话分析引擎，自动生成Obsidian风格Wiki页面（frontmatter、wiki-link、tag）',
+      '实现质量评分系统（1-5分），自动清理低质量页面，只保留精品内容',
+      '开发Desktop侧边栏GUI插件：支持查看、新建、编辑、删除、多选批量操作和导出',
+      '编写install.sh自动安装脚本，支持Gateway RPC补丁自动检测与应用',
+    ],
+    achievements: [
+      '支持7语言i18n（中/英/日/韩/德/法/西）',
+      'Python 67.8% + JavaScript 29.6% 全栈独立开发',
+      'GitHub开源：github.com/eiritsu/hermes-wiki-plugin',
+    ],
+    highlights: ['Karpathy LLM Wiki模式', '7语言i18n', '全栈独立开发', '开源项目'],
+    github: 'https://github.com/eiritsu/hermes-wiki-plugin',
+  },
+  {
     title: '企业网络安全与等保2.0改造',
     period: '2023.05 - 2024.09',
     color: 'red',

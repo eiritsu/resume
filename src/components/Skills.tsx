@@ -80,93 +80,75 @@ const colorMap: Record<string, {
 /* ── skill categories ── */
 const skillCategories = [
   {
-    id: 'it-service',
-    title: 'IT服务与团队管理',
+    id: 'ai-architecture',
+    title: 'AI Gateway与Agent基座',
     color: 'blue',
     skills: [
-      'ITSC流程建设',
-      'SOP 25+份',
-      '5人团队+多地外包管理',
-      'OKR+KPI',
-      '跨部门沟通',
-    ],
-  },
-  {
-    id: 'business-systems',
-    title: '业务系统实施与运维',
-    color: 'purple',
-    skills: [
-      '用友BIP ERP',
-      '金蝶K3',
-      '致远/泛微OA',
-      'CRM实施',
-      '业财一体化',
-      'ERP迁移',
-      '模块二次开发',
+      'OpenAI 协议高并发流式代理',
+      '多Provider动态路由与Token计量',
+      'Rust (Tauri v2) / Electron 桌面端研发',
+      'LangGraph / Dify / Hermes Agent',
+      '全链路可观测性 (Prometheus+Loki)',
     ],
   },
   {
     id: 'ai-business',
-    title: 'AI业务化落地',
+    title: 'AI业务落地与组件自研',
     color: 'green',
     skills: [
-      'CRM邮件分析',
-      '客户画像侧写',
-      'AI合同审核',
-      'AI周报自动生成',
-      '自研轻量ERP/BI',
-      'LangGraph/Dify/OpenClaw',
+      'HireFlow 智能招聘与简历初筛平台',
+      'CRM邮件分析与高价值线索识别',
+      'AI合同风险审核与修改建议生成',
+      'ASR会议/面试纪要抽取 (v2.0)',
+      '基于SQLite树形Wiki的企业知识库',
     ],
   },
   {
-    id: 'cross-border',
-    title: '跨境与合规',
-    color: 'orange',
+    id: 'identity-security',
+    title: '统一身份治理与安全合规',
+    color: 'purple',
     skills: [
-      '境外SaaS管理',
-      'SD-WAN跨境组网',
-      '等保2.0三级',
-      '公安网安审查',
-      '数据出境合规',
-    ],
-  },
-  {
-    id: 'network-security',
-    title: '网络与安全',
-    color: 'red',
-    skills: [
-      'Cisco ASA/华为USG',
-      '深信服AC/飞塔Fortinet',
-      'VPN/VRRP',
-      '行为审计',
+      'OIDC / OAuth2 / LDAP 企业SSO',
+      '协同办公平台组织同步与生命周期自动化',
       '等保2.0三级合规改造',
-      '网络架构规划',
-      '信息安全体系建设',
+      '双防火墙(飞塔/华为) + VPN架构',
+      'Snipe-IT + RFID 资产全生命周期管理',
     ],
   },
   {
-    id: 'endpoint',
-    title: '终端与桌面',
-    color: 'teal',
-    skills: [
-      'Windows/macOS管理',
-      'Windows镜像封装',
-      'AD域控',
-      'Exchange',
-      'Snipe-IT+RFID资产管理',
-    ],
-  },
-  {
-    id: 'automation',
-    title: '自动化与开发',
+    id: 'business-systems',
+    title: '业务系统实施与数据打通',
     color: 'indigo',
     skills: [
-      'Python/PowerShell/Shell',
-      'n8n工作流自动化',
-      'Linux(Fedora/Ubuntu)',
-      'Docker容器化部署',
-      'Dify+n8n AI平台搭建',
-      '钉钉/飞书/企微SSO打通',
+      '用友BIP ERP / 金蝶K3实施与迁移',
+      '致远/泛微OA审批流程与集成',
+      'CRM/ERP/OA 跨部门数据打通',
+      '业财一体化落地',
+      'ITSC流程与25+份SOP规范建设',
+    ],
+  },
+  {
+    id: 'dev-automation',
+    title: '工程开发与自动化运维',
+    color: 'teal',
+    skills: [
+      'Go / Java / Rust / Python / TypeScript',
+      'Docker容器化与CI/CD编排',
+      'n8n / 消息队列异步事件联动',
+      'Linux服务器运维与网络调优',
+      'macOS / Windows 跨平台原生打包',
+    ],
+  },
+  {
+    id: 'team-management',
+    title: '团队领导与跨部门协同',
+    color: 'orange',
+    skills: [
+      '8年+甲方IT管理与团队统筹',
+      '多地远程与驻场外包团队管理',
+      'OKR+KPI绩效体系落地',
+      '跨部门业务痛点抽象与技术方案交付',
+      '高难度/零预算项目平滑攻坚',
     ],
   },
 ]
@@ -327,7 +309,7 @@ export function Skills() {
           </h2>
           <AnimatedUnderline />
           <p className="mt-4 text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            涵盖IT基础设施、业务系统、AI应用、网络安全、跨境合规与自动化开发的全栈技能体系
+            涵盖 AI Agent 基座、企业 AI 落地、统一身份治理、业务系统、网络安全与全栈工程开发
           </p>
         </motion.div>
 

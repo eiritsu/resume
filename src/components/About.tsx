@@ -25,7 +25,7 @@ const strengths = [
     title: '精通AI工具业务落地',
     icon: Cpu,
     color: 'purple',
-    description: 'CRM邮件智能分析、客户画像侧写、AI合同审核等',
+    description: '企业级AI Gateway、HireFlow智能初筛、CRM邮件分析等',
   },
   {
     title: '熟悉企业业务系统实施运维',
@@ -34,16 +34,16 @@ const strengths = [
     description: '用友BIP ERP、金蝶K3、致远/泛微OA等',
   },
   {
-    title: 'Python+LLM自研AI组件能力',
+    title: '全栈自研AI组件与客户端能力',
     icon: Code2,
     color: 'orange',
-    description: '独立完成CRM邮件分析、合同审核等',
+    description: 'Go/Java网关、Rust/Tauri与Electron桌面端、Python流水线',
   },
   {
-    title: '掌握主流AI Agent框架',
+    title: '掌握主流AI Agent框架与生态',
     icon: Bot,
     color: 'teal',
-    description: 'LangGraph、Dify、n8n、Hermes、OpenClaw等',
+    description: 'DeepSeek生态、Hermes、LangGraph、Dify、Tauri v2等',
   },
   {
     title: '跨部门数据架构设计能力',

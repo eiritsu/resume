@@ -1,494 +1,303 @@
-import { motion } from 'framer-motion'
-import { Fragment } from 'react'
-import { GitBranch, ArrowRight } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowUpRight, GitBranch, Terminal, ChevronRight, CheckCircle2 } from 'lucide-react'
 import { cn } from '../lib/utils'
 
-const colorMap = {
-  blue: {
-    border: 'border-blue-500',
-    badge: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
-    tag: 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300',
-    bullet: 'text-blue-500',
-    highlight: 'bg-blue-50 dark:bg-blue-900/20',
-    highlightText: 'text-blue-700 dark:text-blue-300',
-  },
-  purple: {
-    border: 'border-purple-500',
-    badge: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
-    tag: 'bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300',
-    bullet: 'text-purple-500',
-    highlight: 'bg-purple-50 dark:bg-purple-900/20',
-    highlightText: 'text-purple-700 dark:text-purple-300',
-  },
-  green: {
-    border: 'border-green-500',
-    badge: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
-    tag: 'bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-300',
-    bullet: 'text-green-500',
-    highlight: 'bg-green-50 dark:bg-green-900/20',
-    highlightText: 'text-green-700 dark:text-green-300',
-  },
-  red: {
-    border: 'border-red-500',
-    badge: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
-    tag: 'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-300',
-    bullet: 'text-red-500',
-    highlight: 'bg-red-50 dark:bg-red-900/20',
-    highlightText: 'text-red-700 dark:text-red-300',
-  },
-  orange: {
-    border: 'border-orange-500',
-    badge: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300',
-    tag: 'bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-300',
-    bullet: 'text-orange-500',
-    highlight: 'bg-orange-50 dark:bg-orange-900/20',
-    highlightText: 'text-orange-700 dark:text-orange-300',
-  },
-  teal: {
-    border: 'border-teal-500',
-    badge: 'bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300',
-    tag: 'bg-teal-50 text-teal-700 dark:bg-teal-900/20 dark:text-teal-300',
-    bullet: 'text-teal-500',
-    highlight: 'bg-teal-50 dark:bg-teal-900/20',
-    highlightText: 'text-teal-700 dark:text-teal-300',
-  },
-  indigo: {
-    border: 'border-indigo-500',
-    badge: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300',
-    tag: 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-300',
-    bullet: 'text-indigo-500',
-    highlight: 'bg-indigo-50 dark:bg-indigo-900/20',
-    highlightText: 'text-indigo-700 dark:text-indigo-300',
-  },
-} as const
-
-type ColorKey = keyof typeof colorMap
-
 interface Project {
+  id: string
   title: string
-  category: string
-  color: ColorKey
-  techStack: string
+  category: 'AI Agent' | 'AI Infra' | 'IT Infra' | '开源'
   role: string
-  description: string
-  responsibilities: string[]
-  achievements: string[]
+  headline: string
+  overview: string
   highlights: string[]
+  achievements: string[]
+  tags: string[]
   github?: string
 }
 
 const projects: Project[] = [
   {
-    title: '企业级 AI Agent 平台（DeepSeek Harness 企业版）',
-    category: 'AI Agent 项目经历',
-    color: 'blue',
-    techStack: 'DeepSeek Harness / SQLite / Electron / Swift / OCR',
-    role: '企业侧架构与核心研发',
-    description:
-      '公司以 DeepSeek Harness 企业版作为全员 AI 助手平台，但官方存在 P0 级缺陷：数据分散存储易损坏、版本升级易导致系统崩溃、长时间对话后程序崩溃。',
-    responsibilities: [
-      '修复会话、工作区、插件与凭据分散存储导致的损坏问题，统一收敛存储',
-      '设计「分步上线 ➔ 自动自检 ➔ 一键切换」升级流程，失败自动回滚旧版本',
-      '重写长对话记忆压缩逻辑解决长会话崩溃；负责 macOS / Windows 客户端迭代发布',
+    id: 'ai-gateway',
+    title: '统一身份认证平台与自研 AI Gateway',
+    category: 'AI Infra',
+    role: '架构设计与核心研发',
+    headline: '8 个内部系统统一登录、多模型按任务路由与额度成本实时治理',
+    overview: '解决企业内部各系统账号孤岛与员工无序调用商业大模型的成本失控问题。以飞书账号作为唯一入口（兼容 LDAP），自研 AI Gateway 支持多供应商模型统一路由、SSE/WebSocket 流式转发与配额层级继承。',
+    highlights: [
+      '自建 OIDC 授权服务器（支持 PKCE 与密钥轮换），员工飞书一键免密登录',
+      '模型额度按「员工 > 所在部门 > 上级部门 > 全局」继承，变更实时生效',
+      '规范 112 个模型标识，集成 Prometheus + Loki 进行实时 API 审计追溯',
     ],
     achievements: [
-      '40 名用户运行环境无感切换，130.75GB 历史数据迁移零缺失零损坏',
-      '每个版本通过自动化测试后发布',
+      '单节点平均延迟 <20ms，支持高并发实时流式输出',
+      '支撑公司 8 个自研业务系统的统一准入与模型计费',
     ],
-    highlights: ['全员AI助手', '无感切换', '零缺失迁移', '跨平台发布'],
+    tags: ['Go', 'Java', 'OIDC', 'OAuth2', 'LDAP', '飞书开放平台', 'SSE', 'Prometheus'],
+  },
+  {
+    id: 'hireflow',
+    title: 'HireFlow — 智能招聘与简历初筛 Agent',
+    category: 'AI Agent',
+    role: '独立全栈研发',
+    headline: '多模态文档解析、10秒智能初筛打分与飞书面试全流程闭环',
+    overview: '面向 HR 与技术面试官的端侧 AI 招聘工具。采用 Rust (Tauri v2) + React 构建跨平台桌面应用，通过本地/云端混合解析流水线自动识别注水简历，并与飞书日历、会议室及评价卡片深度联动。',
+    highlights: [
+      '支持 PDF/Word 简历与图片 OCR 智能提取，自动识别注水与风险项',
+      '自研人才库 SHA-256 内容去重与多版本对比机制',
+      '打通飞书：自动发卡片通知、预约会议室、双面试官免密独立评价',
+    ],
+    achievements: [
+      '单份简历初筛时间从人工约 15 分钟缩短至 10 秒以内',
+      '交付跨平台桌面端（macOS/Windows）与网页端，HR 独立上线使用',
+    ],
+    tags: ['Rust (Tauri v2)', 'React', 'TypeScript', 'LLM Pipeline', 'OCR', '飞书开放平台'],
+  },
+  {
+    id: 'dsh-desktop',
+    title: '企业级 AI Agent 桌面宿主环境',
+    category: 'AI Infra',
+    role: '企业侧架构与开发',
+    headline: 'DeepSeek Harness 运行时企业化改造与跨平台稳定发布',
+    overview: '在官方开源桌面 Agent 框架基础上进行企业级增强改造，统一收敛会话持久化存储，设计自动化自检与回滚机制，保障长对话稳定性。',
+    highlights: [
+      '解决官方会话数据分散易损坏问题，收敛为 SQLite 单库事务管理',
+      '建立「分步上线 ➔ 自动自检 ➔ 一键切换」升级链路，失败毫秒级回滚',
+      '重构长对话上下文压缩（Compaction）机制，保障长时间会话不崩溃',
+    ],
+    achievements: [
+      '支撑 40+ 员工运行环境无感切换，迁移 130+GB 历史归档数据零损坏',
+      '覆盖 macOS (Swift) 与 Windows 原生打包持续交付',
+    ],
+    tags: ['DeepSeek Harness', 'SQLite', 'Electron', 'Swift', 'OCR'],
     github: 'https://github.com/eiritsu/DeepSeek-Harness-Desktop',
   },
   {
-    title: '统一身份认证平台与 AI Gateway（自研）',
-    category: 'AI Agent 项目经历',
-    color: 'purple',
-    techStack: 'Go / Java Spring Boot / OIDC / OAuth2 / LDAP / 飞书开放平台 / SSE / WebSocket / Prometheus / Loki',
-    role: '架构设计与核心研发',
-    description:
-      '各系统账号分散，员工使用大模型缺乏统一入口，权限、额度和费用难以管控。',
-    responsibilities: [
-      '以飞书账号作为唯一登录入口，兼容 LDAP 打通内部旧系统，权限按部门分配',
-      '自研 AI 网关统一管理模型、密钥、额度与用量审计，额度按「个人 > 部门 > 上级部门 > 全公司」逐级继承',
-      '接入监控与日志系统，统一规范 112 个模型名称',
-    ],
-    achievements: [
-      '网关单节点延迟 <20ms，支持 AI 回答实时流式输出',
-      '8 个内部系统完成统一登录与统一模型调用入口',
-    ],
-    highlights: ['统一身份', '模型网关', '额度分级继承', '流式输出'],
-  },
-  {
-    title: 'HireFlow — AI 智能招聘与简历初筛 Agent',
-    category: 'AI Agent 项目经历',
-    color: 'green',
-    techStack: 'Rust Tauri v2 / React / TypeScript / LLM / OCR / 飞书开放平台',
-    role: '独立全栈研发',
-    description:
-      'HR 人工初筛简历耗时长，存在「注水简历」，面试安排与评价分散在多个工具中。',
-    responsibilities: [
-      '自动读取简历（含扫描件识别）按岗位打分，识别注水简历并提示风险，自动生成 JD',
-      '人才库支持批量导入，自动识别重复简历并保留历史版本',
-      '打通飞书通知、日程与会议室预约，两位面试官独立评价；交付桌面端与网页端及使用手册',
-    ],
-    achievements: [
-      '单份简历初筛由人工约 15 分钟缩短至 10 秒内',
-      '简历识别 ➔ AI 评分 ➔ HR 复核 ➔ 面试安排 ➔ 评价记录全流程线上闭环',
-    ],
-    highlights: ['10秒初筛', '飞书全链路', '桌面端交付', '注水简历识别'],
-  },
-  {
-    title: '企业运营管理 SaaS 与 AI 预警',
-    category: 'AI Agent 项目经历',
-    color: 'teal',
-    techStack: 'LLM / Docker / SQL / SSO / Playwright',
+    id: 'operations-saas',
+    title: '企业运营管理 SaaS 与 AI 双重预警',
+    category: 'AI Agent',
     role: '架构与核心研发',
-    description:
-      '销售、采购、库存、物流、制造、项目、HR 七大业务板块流程分散，业务异常主要靠人工发现。',
-    responsibilities: [
-      '统一七大板块的提交与审批入口，支持单人审批、依次会签、同时会签与撤回规则',
-      '自研审批流程引擎，自动检查死循环、走不通节点等配置错误，AI 处理不了的事项转人工',
-      'AI 双重预警：员工随时让 AI 分析数据，系统按 5 分钟至 24 小时自动巡检并推送待办',
+    headline: '覆盖进销存七大板块的自研工作流引擎与智能巡检系统',
+    overview: '打通销售、采购、库存、物流、制造、项目、HR 七大业务板块。内建可视化审批流程引擎与 AI 双重预警机制，实现业务异常主动推送与待办闭环。',
+    highlights: [
+      '自研审批流程引擎：自动校验死循环与死节点，AI 处理受阻自动转人工',
+      'AI 双重预警：支持随时主动分析，同时系统按 5m~24h 自动巡检七大板块',
+      '采购定点前自动进行供应商 A/B/C 匿名化比价脱敏处理',
     ],
     achievements: [
-      '七大板块全部通过自动化浏览器验收，411/411 项测试通过',
-      '生产环境运行正常，保留可随时回退的版本与数据库备份',
+      '七大板块全部通过 Playwright 浏览器自动化验收（411/411 测试通过）',
+      '生产环境稳定运行，具备随时回退与数据库增量备份机制',
     ],
-    highlights: ['七大板块', 'AI双重预警', '411/411测试', '流程引擎自研'],
+    tags: ['Node.js', 'React', 'Docker', 'SQLite', 'Playwright', 'SSO'],
   },
   {
-    title: '飞书项目管理 Agent',
-    category: 'AI Agent 项目经历',
-    color: 'indigo',
-    techStack: '飞书开放平台 / LLM',
+    id: 'feishu-agent',
+    title: '飞书项目管理 Agent 与自动化周报',
+    category: 'AI Agent',
     role: '独立设计与开发',
-    description:
-      '项目沟通散落在各个群聊中，待办事项和周报依赖人工整理。',
-    responsibilities: [
-      '飞书机器人自动归档群聊消息，实时拆分、合并、转交待办，支持自然语言检索工作记录',
-      '自动生成个人与项目周报，支持导入妙记会议记录并生成 PPT / Excel；主模型故障三级切换',
+    headline: '群聊信息智能归档、待办原子拆解与周报定时生成',
+    overview: '针对项目沟通散落在 IM 群聊的痛点开发的常驻飞书机器人。实时归档讨论事实，智能拆分合并任务卡片，并自动汇总跨系统进度生成项目周报。',
+    highlights: [
+      '群聊消息实时归档与自然语言多维工作事实检索',
+      '支持从飞书妙记会议记录自动提炼待办并生成 PPT/Excel 文档',
+      '主模型发生故障时自动触发三级备用模型平滑容灾切换',
     ],
     achievements: [
-      '每周一 08:30 自动推送待办、周五 17:00 自动推送项目周报',
+      '固定周一 08:30 自动推送待办卡片、周五 17:00 自动生成周报',
     ],
-    highlights: ['群聊转待办', '自动周报', '三级模型切换'],
+    tags: ['飞书开放平台', 'LLM Pipeline', 'Task Automation', 'Python'],
   },
   {
-    title: '企业 AI 助手平台与业务 AI 应用',
-    category: 'AI Agent 项目经历',
-    color: 'orange',
-    techStack: 'Dify / n8n / OpenClaw / OpenAI / Gemini / MiniMax / Python / FastAPI / Vue',
-    role: '平台搭建与业务落地',
-    description:
-      '三地办公的知识产权咨询公司，客户邮件跟进、合同审核、周报等工作大量依赖人工。',
-    responsibilities: [
-      '搭建公司 AI 平台接入多家大模型，按任务难易自动选模型；打通钉钉 / 飞书 / 企微单点登录',
-      'CRM 邮件 AI：客户邮件自动分级、提取意向线索、生成客户画像',
-      'AI 合同审核：自动标出风险条款并给出修改建议；周报与表单预审改为自动生成 + 人工复核',
+    id: 'patents-wiki',
+    title: '企业专利本地知识库 (RAG 架构重构)',
+    category: 'AI Agent',
+    role: '架构设计与落地',
+    headline: '放弃传统向量数据库缺陷，基于树形 Wiki 架构将准确率提至 95%+',
+    overview: '针对企业内部快速检索 Google Patents 专利数据的需求。在早期向量数据库（Vector RAG）检索准确率低且误差大的情况下，果断重构为分层树形 Wiki 目录检索方案。',
+    highlights: [
+      '按「行业 ➔ 地区 ➔ 专利」分层目录清洗入库，建立结构化倒排索引',
+      '基于轻量 SQLite 实现完全本地化部署，不依赖第三方云向量接口',
     ],
     achievements: [
-      '大模型调用成本降低 30%；3000+ 封邮件分类准确率 95%，高价值客户识别 78%',
-      '合同审核时间节省 70%+；周报耗时从 1–2 天缩短至 3 小时内',
+      '检索命中率从早期向量方案约 60% 大幅跃升至 95%+',
+      '单次查询响应时间 <200ms，实现零外部依赖纯私有运行',
     ],
-    highlights: ['成本降30%', '95%分类准确率', '合同审核省时70%', '自动周报'],
+    tags: ['Knowledge Base', 'RAG Evaluation', 'SQLite', 'Python'],
   },
   {
-    title: '专利本地知识库',
-    category: 'AI Agent 项目经历',
-    color: 'red',
-    techStack: 'RAG / SQLite / Python',
-    role: '主导开发',
-    description:
-      '业务部门需要快速检索 Google Patents 专利数据，常规 AI 知识库方案（向量检索 RAG）找得不准。',
-    responsibilities: [
-      '评估后放弃常规方案，改为按「行业 ➔ 地区 ➔ 专利」分层目录组织数据，提供查询接口与定期增量更新',
+    id: 'infra-network',
+    title: '跨国专线优化与自研网络中心 (NOC)',
+    category: 'IT Infra',
+    role: '方案设计与交付',
+    headline: '专线光纤割接、自建海外双节点替代 SD-WAN 专线（月省数万）',
+    overview: '主导办公室网络与服务器物理机房重建。割接固定 IP 专线，自建新加坡海外互备节点降低跨国 SaaS 延迟与高昂资费，并自研轻量 NOC 监控系统。',
+    highlights: [
+      '电信专线光纤拉线/装机全程闭环，华为 USG6000E + S5735 端口级隔离',
+      '自建新加坡双 VPS 节点配合 SmartDNS 与 WireGuard 替代高价 SD-WAN',
+      '自研 NOC 平台，实时纳管网管设备与主机，实现配置热重载与流量拓扑',
     ],
     achievements: [
-      '检索命中率由约 60% 提升至 95%+，查询响应 <200ms',
-      '本地部署，不依赖外部服务',
+      '每月为公司节省 3～7 万元跨境网络运营费用；专线租费成功谈判降价 50%',
+      '网络故障排查由过去盲盒状态提升为秒级链路精准定位',
     ],
-    highlights: ['60% ➔ 95%命中率', '<200ms响应', '零外部依赖'],
+    tags: ['华为 USG/S5735', 'WireGuard', 'SmartDNS', 'VLAN 隔离', 'Linux'],
   },
   {
-    title: '跨境网络降本与办公网络安全建设',
-    category: 'IT 基础设施项目',
-    color: 'blue',
-    techStack: '华为 USG6000E / S5735 / WireGuard / SmartDNS',
-    role: '方案设计 + 实施交付',
-    description:
-      '跨境访问依赖 SD-WAN 专线，费用高；办公网络需要重新建设。',
-    responsibilities: [
-      '完成电信固定 IP 专线从拉光纤、装机到开通割接全过程；华为防火墙与交换机验收上线，按端口划分隔离',
-      '自建海外双节点互备，配合智能 DNS 分流与 VPN 替代原 SD-WAN 专线',
-      '自研网络运行中心（NOC），统一监控网络设备与员工电脑，实时显示网络流量',
+    id: 'hermes-wiki',
+    title: 'Hermes Wiki — AI 会话知识库插件',
+    category: '开源',
+    role: '独立全栈开发',
+    headline: '基于 Karpathy LLM Wiki 范式的多语言会话知识沉淀开源工具',
+    overview: '为 Hermes AI Agent 生态打造的智能知识库插件。自动将零散的人机交互会话提炼为结构化 Obsidian 风格 Wiki 页面，具备实体抽取与质量评估体系。',
+    highlights: [
+      '设计 Extension 模式与 Standalone 独立 SQLite 双架构方案',
+      '支持 7 种语言国际化（i18n），提供原生桌面端侧边栏交互面板',
     ],
     achievements: [
-      '每月为公司节省 3～7 万元，专线资费谈判由 2388 元/月降至 1194 元/月',
+      '全栈独立实现（Python + JavaScript），在 GitHub 开源维护',
     ],
-    highlights: ['月省3~7万', '专线对折', '自研NOC', '端口级隔离'],
-  },
-  {
-    title: '服务器虚拟化与终端标准化',
-    category: 'IT 基础设施项目',
-    color: 'purple',
-    techStack: 'VMware / 超融合 / 桌面云 / AD / 组策略',
-    role: '主导设计与实施',
-    description:
-      '公司电脑配置不统一、故障多，服务器资源利用率低。',
-    responsibilities: [
-      '统一封装 Windows 系统镜像，配合 AD 域与组策略统一管理全员电脑',
-      '搭建虚拟化集群（VMware + 超融合 + 桌面云），承载核心业务系统',
-    ],
-    achievements: [
-      '电脑故障率 1 年内降低 60%，核心业务可用性 99.99%（年停机 ≤6 小时）',
-      '服务器利用率从 30% 提升至 70%',
-    ],
-    highlights: ['故障率降60%', '可用性99.99%', '利用率30%➔70%'],
-  },
-  {
-    title: '全球网络与远程会议优化',
-    category: 'IT 基础设施项目',
-    color: 'green',
-    techStack: 'SD-WAN / QoS / VPN',
-    role: '主导实施',
-    description:
-      '跨国视频会议卡顿，SD-WAN 通信费用高。',
-    responsibilities: [
-      '调整全球网络节点，对 Zoom 视频流量专项优化，设置带宽优先级与加密通道；网络分层隔离，支持多终端安全接入',
-    ],
-    achievements: [
-      '高清视频流畅度 98%+，每年节省 SD-WAN 通信成本 17 万元',
-    ],
-    highlights: ['流畅度98%+', '年省17万'],
-  },
-  {
-    title: '办公搬迁网络重构',
-    category: 'IT 基础设施项目',
-    color: 'teal',
-    techStack: 'x86 软路由 / 开源 SSLVPN / Cisco',
-    role: '方案设计与实施',
-    description:
-      '公司搬迁，需用老旧思科设备异地组网，原有 VPN 不兼容 Win10 及以上系统。',
-    responsibilities: [
-      '用 x86 服务器搭建软路由和防火墙替代老化硬件；部署开源 VPN 解决远程办公接入；制定 IP 规划与切换方案',
-    ],
-    achievements: [
-      '零硬件采购预算完成升级，搬迁期间业务系统 0 停机、0 数据丢失',
-    ],
-    highlights: ['零预算升级', '0停机0丢失'],
-  },
-  {
-    title: 'IT 资产全生命周期与 AI 智能管理',
-    category: 'IT 基础设施项目',
-    color: 'indigo',
-    techStack: 'Snipe-IT / RFID / LLM / Python',
-    role: '二次开发 + 架构设计',
-    description:
-      '设备数量多，人工盘点慢、易出错，设备故障难以提前发现。',
-    responsibilities: [
-      '引入 Snipe-IT + RFID 标签，覆盖采购、领用、维修、报废全流程，以网络扫描替代逐台人工盘点',
-      '二次开发接入大模型，自动扫描发现网络设备、生成安全审计报告、预测易故障设备',
-    ],
-    achievements: [
-      '累计管理 1800+ 台设备，AI 阶段实现 90% 自动发现，审计报告 4 天 ➔ 30 分钟',
-    ],
-    highlights: ['1800+设备', '90%自动发现', '4天➔30分钟', '故障率降30%'],
-  },
-  {
-    title: 'Hermes Wiki — AI Agent 会话知识库插件',
-    category: '开源项目',
-    color: 'orange',
-    techStack: 'Python / JavaScript / SQLite / LLM / Obsidian Markdown / 7语言i18n',
-    role: '独立开发并开源',
-    description:
-      '基于 Karpathy LLM Wiki 模式，自动将 AI 会话转为 Obsidian 风格 Wiki 页面，支持质量评分与主题分类。',
-    responsibilities: [
-      '设计双模式架构：Extension 模式与 Standalone 模式（独立 SQLite 存储）',
-      '开发 LLM 驱动的会话分析引擎，自动生成带 frontmatter、wiki-link、tag 的 Wiki 页面',
-      '开发 Desktop 侧边栏 GUI，支持查看、编辑、批量操作与导出',
-    ],
-    achievements: [
-      '支持 7 语言 i18n，Python + JavaScript 全栈独立开发',
-    ],
-    highlights: ['Karpathy LLM Wiki模式', '7语言i18n', '全栈独立开发', '开源项目'],
+    tags: ['Python', 'JavaScript', 'SQLite', 'Obsidian', '7-Lang i18n'],
     github: 'https://github.com/eiritsu/hermes-wiki-plugin',
   },
-  {
-    title: 'AI 会议纪要与候选人评估 Skill',
-    category: '开源项目',
-    color: 'red',
-    techStack: 'ASR 服务 / 三段式 Prompt 流水线 / VAD 切片 / 多语言',
-    role: '设计并开发 Agent Skill',
-    description:
-      '设计并开发会议 / 面试音频转结构化纪要的 Agent Skill，支持多语言识别与智能摘要生成，已迭代至 v2.0。',
-    responsibilities: [
-      '集成 ASR 服务，完成长音频自动切片、VAD 静音检测与说话人识别',
-      '搭建三段式 Prompt 流水线与 SQLite 结构化存储，已应用于面试候选人评估流程',
-    ],
-    achievements: [
-      '1 小时会议录音 ➔ 结构化纪要压缩至 15 分钟以内',
-    ],
-    highlights: ['15分钟内出纪要', '多语言支持', '开源项目', '面试评估闭环'],
-    github: 'https://github.com/eiritsu/meeting-minutes-interview',
-  },
 ]
-export function Projects() {
-  return (
-    <section id="projects" className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        {/* Section Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            核心项目
-          </h2>
-          <motion.div
-            className="h-1 w-24 mx-auto rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-green-500"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
-          />
-        </motion.div>
 
-        {/* Project Cards */}
-        <div className="space-y-6">
-          {projects.map((project, index) => {
-            const colors = colorMap[project.color]
-            return (
-              <Fragment key={project.title}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-30px' }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-                }}
+const categories = ['全部', 'AI Agent', 'AI Infra', 'IT Infra', '开源'] as const
+
+export function Projects() {
+  const [activeTab, setActiveTab] = useState<typeof categories[number]>('全部')
+
+  const filtered = activeTab === '全部'
+    ? projects
+    : projects.filter(p => p.category === activeTab)
+
+  return (
+    <section id="projects" className="py-24 border-t border-neutral-900 bg-neutral-950">
+      <div className="container-custom">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 pb-6 border-b border-neutral-800/80">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">
+              03 / WORKS & ARCHITECTURE
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-1">
+              精选生产项目
+            </h2>
+          </div>
+
+          {/* Minimalist Category Filter */}
+          <div className="flex flex-wrap gap-1 bg-neutral-900/80 p-1 rounded-lg border border-neutral-800/80">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveTab(cat)}
                 className={cn(
-                  'border-l-4 rounded-r-lg p-6 md:p-8',
-                  'bg-white dark:bg-gray-800/50',
-                  'shadow-md',
-                  'hover:-translate-y-1 hover:shadow-xl transition-all duration-300',
-                  colors.border
+                  'px-3 py-1 text-xs font-mono tracking-wider transition-colors rounded-md',
+                  activeTab === cat
+                    ? 'bg-neutral-800 text-white font-medium shadow-sm'
+                    : 'text-neutral-400 hover:text-neutral-200'
                 )}
               >
-                {/* Header: period + role + title */}
-                <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <span
-                    className={cn(
-                      'px-3 py-1 rounded-full text-sm font-medium',
-                      colors.badge
-                    )}
-                  >
-                    {project.category}
-                  </span>
-                  <span
-                    className={cn(
-                      'px-3 py-1 rounded-full text-sm font-medium',
-                      'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    )}
-                  >
-                    {project.role}
-                  </span>
-                </div>
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
 
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Tech Stack Tags */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.techStack.split(' / ').map((tag) => (
-                    <span
-                      key={tag}
-                      className={cn(
-                        'px-3 py-1 rounded-full text-sm',
-                        colors.tag
-                      )}
-                    >
-                      {tag}
+        {/* Minimalist Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((item) => (
+              <motion.div
+                key={item.id}
+                layout
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.3 }}
+                className="hairline-card flex flex-col justify-between group"
+              >
+                <div>
+                  {/* Card Meta Top */}
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="mono-tag text-[10px]">
+                      {item.category}
                     </span>
-                  ))}
-                </div>
-
-                {/* Highlights */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.highlights.map((h) => (
-                    <span
-                      key={h}
-                      className={cn(
-                        'px-3 py-1.5 rounded-lg text-sm font-semibold',
-                        colors.highlight,
-                        colors.highlightText
-                      )}
-                    >
-                      {h}
+                    <span className="font-mono text-xs text-neutral-500">
+                      {item.role}
                     </span>
-                  ))}
-                </div>
+                  </div>
 
-                {/* Responsibilities */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                    主要职责
-                  </h4>
-                  <ul className="space-y-1.5">
-                    {project.responsibilities.map((r) => (
-                      <li key={r} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
-                        <ArrowRight className={cn('w-4 h-4 mt-0.5 shrink-0', colors.bullet)} />
-                        <span>{r}</span>
-                      </li>
+                  {/* Title & Headline */}
+                  <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-2 group-hover:text-blue-400 transition-colors">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs text-neutral-300 font-medium mb-4 leading-relaxed">
+                    {item.headline}
+                  </p>
+
+                  <p className="text-xs text-neutral-400 leading-relaxed mb-5 font-sans">
+                    {item.overview}
+                  </p>
+
+                  {/* Key Highlights */}
+                  <div className="space-y-2 mb-6 pt-4 border-t border-neutral-900">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-neutral-500 block">
+                      架构设计要点
+                    </span>
+                    <ul className="space-y-1.5">
+                      {item.highlights.map((h, i) => (
+                        <li key={i} className="flex items-start gap-2 text-xs text-neutral-300">
+                          <ChevronRight className="w-3.5 h-3.5 text-blue-400 mt-0.5 shrink-0" />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Achievements */}
+                  <div className="space-y-1.5 mb-6 bg-neutral-900/50 p-3 rounded-lg border border-neutral-800/60">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-neutral-400 block mb-1">
+                      成果指标
+                    </span>
+                    {item.achievements.map((ach, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs text-emerald-400/90 font-mono">
+                        <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0 text-emerald-400" />
+                        <span>{ach}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
-                {/* Achievements */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                    项目成果
-                  </h4>
-                  <ul className="space-y-1.5">
-                    {project.achievements.map((a) => (
-                      <li key={a} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
-                        <span className={cn('w-1.5 h-1.5 mt-2 rounded-full shrink-0', colors.bullet, 'bg-current')} />
-                        <span>{a}</span>
-                      </li>
+                {/* Footer: Tags & GitBranch */}
+                <div className="pt-4 border-t border-neutral-900 flex flex-wrap items-center justify-between gap-3 mt-auto">
+                  <div className="flex flex-wrap gap-1.5">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="font-mono text-[10px] text-neutral-400 bg-neutral-900 px-2 py-0.5 rounded border border-neutral-800/80"
+                      >
+                        {tag}
+                      </span>
                     ))}
-                  </ul>
-                </div>
+                  </div>
 
-                {/* GitHub Link */}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      'inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-lg',
-                      'text-sm font-medium transition-colors duration-200',
-                      'bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600',
-                      'text-gray-700 dark:text-gray-200'
-                    )}
-                  >
-                    <GitBranch className="w-4 h-4" />
-                    GitHub 仓库
-                    <ArrowRight className="w-3 h-3" />
-                  </a>
-                )}
+                  {item.github && (
+                    <a
+                      href={item.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-xs text-neutral-300 hover:text-white transition-colors"
+                    >
+                      <GitBranch className="w-3.5 h-3.5" />
+                      <span>Code</span>
+                      <ArrowUpRight className="w-3 h-3 text-neutral-500" />
+                    </a>
+                  )}
+                </div>
               </motion.div>
-              </Fragment>
-            )
-          })}
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

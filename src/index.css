@@ -10,72 +10,49 @@
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, 'Noto Sans SC', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    @apply bg-neutral-950 text-neutral-100 selection:bg-neutral-800 selection:text-white;
   }
 
-  ::selection {
-    @apply bg-blue-200 text-blue-900;
+  /* Fine architectural grid background */
+  .bg-grid-pattern {
+    background-size: 32px 32px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   }
 
-  :focus-visible {
-    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+  .bg-radial-fade {
+    background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
   }
 }
 
 @layer components {
-  .container-apple {
-    @apply mx-auto w-full max-w-5xl px-6;
+  .container-custom {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
   }
 
-  .section {
-    @apply py-20;
+  /* Minimalist hairline card */
+  .hairline-card {
+    @apply relative rounded-xl border border-neutral-800/80 bg-neutral-900/40 p-6 backdrop-blur-md transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/60;
   }
 
-  .section-title {
-    @apply text-center mb-16;
-  }
-
-  .card {
-    @apply rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800/60;
-  }
-
-  .tag {
-    @apply inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300;
-  }
-
-  .tag-blue {
-    @apply inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300;
-  }
-
-  .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-white/30;
-  }
-
-  .glass-dark {
-    @apply bg-gray-900/80 backdrop-blur-xl border border-gray-800/30;
-  }
-
-  .text-gradient {
-    @apply bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent;
+  .mono-tag {
+    @apply font-mono text-[11px] uppercase tracking-wider text-neutral-400 bg-neutral-900/80 px-2.5 py-1 rounded border border-neutral-800;
   }
 }
 
-@layer utilities {
-  .animation-delay-200 { animation-delay: 200ms; }
-  .animation-delay-400 { animation-delay: 400ms; }
-  .animation-delay-600 { animation-delay: 600ms; }
-}
-
+/* Minimalist custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-transparent;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 rounded-full;
+  background: #262626;
+  border-radius: 9999px;
 }
-
-@media print {
-  .no-print { display: none !important; }
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
 }

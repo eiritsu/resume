@@ -1,123 +1,105 @@
 import { motion } from 'framer-motion'
-import { cn } from '../lib/utils'
-
-const education = [
-  {
-    id: 'swju',
-    school: '西南交通大学',
-    degree: '本科',
-    major: '计算机科学与技术',
-    period: '2018 - 2021',
-    description: '计算机科学与技术专业，系统学习计算机基础理论、数据结构、算法、操作系统、计算机网络、数据库原理等核心课程',
-  },
-]
-
-const languages = [
-  { name: '中文', level: '母语', proficiency: 'native' },
-  { name: '英语', level: '简单沟通、读写英文邮件、看懂英文技术文档', proficiency: 'basic' },
-  { name: '日语', level: '读写日语邮件和简单沟通', proficiency: 'intermediate' },
-]
+import { GraduationCap, Languages } from 'lucide-react'
 
 export function Education() {
   return (
-    <section id="education" className="section bg-gray-50 dark:bg-gray-900">
-      <div className="container-apple">
-        <motion.div
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-title-1 md:text-display-3">教育经历与语言</h2>
-        </motion.div>
+    <section id="education" className="py-24 border-t border-neutral-900 bg-neutral-950">
+      <div className="container-custom">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-16 pb-6 border-b border-neutral-800/80">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">
+              04 / BACKGROUND
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-1">
+              教育与工作语言
+            </h2>
+          </div>
+          <p className="font-mono text-xs text-neutral-500">
+            ACADEMIC DEGREE & WORKING LANGUAGES
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-title-3 font-display font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-              <span className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl" aria-hidden="true">🎓</span>
-              教育经历
-            </h3>
+        {/* 2-Column layout: Education + Languages */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Education Box */}
+          <div className="hairline-card flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-6 pb-3 border-b border-neutral-800/60">
+                <div className="flex items-center gap-2 text-white font-medium">
+                  <GraduationCap className="w-4 h-4 text-blue-400" />
+                  <span>高等教育学历</span>
+                </div>
+                <span className="font-mono text-xs text-neutral-500">2018 – 2021</span>
+              </div>
 
-            <div className="space-y-6">
-              {education.map((edu, index) => (
-                <motion.article
-                  key={edu.id}
-                  className="card relative"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-bl-full" aria-hidden="true" />
-                  <div className="relative p-6">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                      <h4 className="text-title-3 font-display font-bold text-gray-900 dark:text-white">{edu.school}</h4>
-                      <span className="tag-blue text-sm">{edu.period}</span>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-3 mb-3">
-                      <span className="tag">{edu.degree}</span>
-                      <span className="tag">{edu.major}</span>
-                    </div>
-                    <p className="text-body text-gray-600 dark:text-gray-300">{edu.description}</p>
-                  </div>
-                </motion.article>
-              ))}
+              <div className="space-y-2">
+                <h3 className="text-xl font-bold text-white tracking-tight">
+                  西南交通大学
+                </h3>
+                <div className="flex items-center gap-2">
+                  <span className="mono-tag text-[10px]">本科</span>
+                  <span className="text-sm text-neutral-300 font-sans">计算机科学与技术</span>
+                </div>
+                <p className="text-xs text-neutral-400 leading-relaxed pt-3 font-sans">
+                  系统研习计算机系统结构、数据结构与算法、计算机网络原理、操作系统及数据库系统设计。
+                </p>
+              </div>
             </div>
-          </motion.div>
 
-          <div className="space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <h3 className="text-title-3 font-display font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl" aria-hidden="true">🌐</span>
-                工作语言
-              </h3>
+            <div className="pt-6 mt-6 border-t border-neutral-900 flex items-center justify-between text-xs font-mono text-neutral-500">
+              <span>专业方向：计算机应用工程</span>
+              <span className="text-emerald-400/80">毕业证书验证完备</span>
+            </div>
+          </div>
+
+          {/* Languages Box */}
+          <div className="hairline-card flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-6 pb-3 border-b border-neutral-800/60">
+                <div className="flex items-center gap-2 text-white font-medium">
+                  <Languages className="w-4 h-4 text-blue-400" />
+                  <span>工作语言能力</span>
+                </div>
+                <span className="font-mono text-xs text-neutral-500">MULTI-LANGUAGE</span>
+              </div>
 
               <div className="space-y-4">
-                {languages.map((lang, index) => (
-                  <motion.div
-                    key={lang.name}
-                    className="card p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className="text-2xl" aria-hidden="true">
-                        {lang.proficiency === 'native' ? '🇨🇳' : lang.proficiency === 'intermediate' ? '🇯🇵' : '🇺🇸'}
-                      </span>
-                      <div>
-                        <h4 className="text-headline font-semibold text-gray-900 dark:text-white">{lang.name}</h4>
-                        <p className="text-caption-1 text-gray-500 dark:text-gray-400">{lang.level}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className={cn(
-                        'tag text-xs font-medium',
-                        lang.proficiency === 'native' && 'bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-                        lang.proficiency === 'intermediate' && 'bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
-                        lang.proficiency === 'basic' && 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300'
-                      )}>
-                        {lang.proficiency === 'native' && '母语级'}
-                        {lang.proficiency === 'intermediate' && '中级'}
-                        {lang.proficiency === 'basic' && '基础'}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
+                <div className="flex items-center justify-between p-3 rounded-lg bg-neutral-900/60 border border-neutral-800/60">
+                  <div className="space-y-0.5">
+                    <span className="text-sm font-semibold text-white">中文 (Mandarin)</span>
+                    <p className="text-xs text-neutral-400">母语，精通各类架构方案撰写与向上商务沟通</p>
+                  </div>
+                  <span className="mono-tag text-[10px] text-emerald-400 border-emerald-900/40 bg-emerald-950/20">
+                    NATIVE
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between p-3 rounded-lg bg-neutral-900/60 border border-neutral-800/60">
+                  <div className="space-y-0.5">
+                    <span className="text-sm font-semibold text-white">英语 (English)</span>
+                    <p className="text-xs text-neutral-400">日常简单交流、顺畅查阅国际前沿开源架构文档与邮件</p>
+                  </div>
+                  <span className="mono-tag text-[10px] text-blue-400 border-blue-900/40 bg-blue-950/20">
+                    WORKING
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between p-3 rounded-lg bg-neutral-900/60 border border-neutral-800/60">
+                  <div className="space-y-0.5">
+                    <span className="text-sm font-semibold text-white">日语 (Japanese)</span>
+                    <p className="text-xs text-neutral-400">读写日常工作邮件与基础业务交流</p>
+                  </div>
+                  <span className="mono-tag text-[10px] text-purple-400 border-purple-900/40 bg-purple-950/20">
+                    BASIC
+                  </span>
+                </div>
               </div>
-            </motion.div>
+            </div>
+
+            <div className="pt-4 text-xs font-mono text-neutral-500">
+              * 具备海外远程与多语言技术外包跨国协作交付经验
+            </div>
           </div>
         </div>
       </div>

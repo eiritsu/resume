@@ -1,125 +1,131 @@
 import { motion } from 'framer-motion'
-import { Mail, MapPin, GitBranch } from 'lucide-react'
-import { cn } from '../lib/utils'
+import { ArrowDown, ArrowUpRight, GitBranch, Mail, Terminal } from 'lucide-react'
 
-const socialLinks = [
-  {
-    icon: Mail,
-    href: 'mailto:yoeiritsu@gmail.com',
-    label: 'Email',
-    external: false,
-  },
-  {
-    icon: GitBranch,
-    href: 'https://github.com/eiritsu',
-    label: 'GitHub',
-    external: true,
-  },
+const stats = [
+  { label: '甲方 IT 管理', value: '8+', unit: '年' },
+  { label: '企业 AI 落地', value: '3', unit: '年' },
+  { label: '内部系统自研', value: '8', unit: '套' },
+  { label: '团队统筹管理', value: '6', unit: '年' },
 ]
-
-const badges = [
-  { text: 'AI Agent 负责人' },
-  { text: '8年经验' },
-  { text: '上海', icon: MapPin },
-]
-
-const easeOut: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
-const easeInOut: [number, number, number, number] = [0.42, 0, 0.58, 1]
 
 export function Hero() {
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id)
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 72
+      window.scrollTo({ top, behavior: 'smooth' })
+    }
+  }
+
   return (
-    <section
-      id="about"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-white to-violet-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"
-    >
-      {/* Floating blurred circles */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-blue-400/20 dark:bg-blue-600/10 blur-3xl"
-        animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: easeInOut }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-violet-400/20 dark:bg-violet-600/10 blur-3xl"
-        animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
-        transition={{ duration: 25, repeat: Infinity, ease: easeInOut }}
-      />
+    <section className="relative min-h-[92vh] flex flex-col justify-between pt-32 pb-16 bg-neutral-950 bg-grid-pattern overflow-hidden">
+      {/* Top subtle ambient radial illumination */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-radial-fade pointer-events-none" />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center px-4 text-center">
-        {/* Badge row */}
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
-          {badges.map((badge, i) => (
-            <motion.span
-              key={badge.text}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{
-                type: 'spring',
-                stiffness: 260,
-                damping: 20,
-                delay: 0.1 + i * 0.1,
-              }}
-              className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/80 px-4 py-1.5 text-sm font-medium text-gray-700 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-300"
-            >
-              {badge.icon && <badge.icon className="h-3.5 w-3.5" />}
-              {badge.text}
-            </motion.span>
-          ))}
-        </div>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: easeOut }}
-          className="mb-10 max-w-2xl text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
-        >
-          8 年甲方 IT 管理经验，近 3 年专注企业 AI Agent 落地。主导企业 AI 平台（统一身份 / 模型网关 / Agent 运行时）与 IT 基础设施两条线，交付 8 个内部业务系统。
-        </motion.p>
-
-        {/* CTA buttons */}
+      <div className="container-custom relative z-10 my-auto">
+        {/* Top metadata strip */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="flex flex-wrap items-center gap-3 mb-8"
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.0, ease: easeOut }}
-          className="mb-12 flex flex-wrap items-center justify-center gap-4"
+          transition={{ duration: 0.5 }}
         >
-          <motion.a
-            href="mailto:yoeiritsu@gmail.com"
-            whileHover={{ scale: 1.05, boxShadow: '0 8px 30px rgba(59, 130, 246, 0.4)' }}
-            whileTap={{ scale: 0.97 }}
-            className="rounded-lg bg-blue-600 px-8 py-3 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
-          >
-            联系我
-          </motion.a>
-          <motion.a
-            href="#projects"
-            whileHover={{ scale: 1.05, boxShadow: '0 8px 30px rgba(0, 0, 0, 0.1)' }}
-            whileTap={{ scale: 0.97 }}
-            className="rounded-lg border border-gray-300 bg-white px-8 py-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-          >
-            查看项目
-          </motion.a>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/60 backdrop-blur-md">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-mono text-xs tracking-wider text-neutral-300">OPEN TO WORK</span>
+          </div>
+          <span className="font-mono text-xs text-neutral-500 tracking-wider">/ SHANGHAI, CN</span>
+          <span className="font-mono text-xs text-neutral-500 tracking-wider hidden sm:inline">/ 35–40K</span>
         </motion.div>
 
+        {/* Main Headline */}
+        <div className="max-w-4xl space-y-6">
+          <motion.h1
+            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white font-sans"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            杨永立 <span className="font-light text-neutral-500 text-3xl sm:text-5xl font-mono">/ Yoeiritsu</span>
+          </motion.h1>
 
+          <motion.div
+            className="font-mono text-lg sm:text-2xl text-blue-400/90 tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            AI Agent 负责人 & 企业平台架构师
+          </motion.div>
+
+          <motion.p
+            className="text-base sm:text-lg text-neutral-400 max-w-2xl leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            连接企业底层 IT 基础设施（机房专线、网管集群、安全等保）与前沿智能体生态（自研 AI Gateway、统一身份、多 Agent 编排）。
+            8 年甲方技术管理积淀，近 3 年专注企业级 AI 系统的真实生产落地与合规交付。
+          </motion.p>
+        </div>
+
+        {/* Actions */}
+        <motion.div
+          className="flex flex-wrap items-center gap-4 mt-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <button
+            onClick={() => scrollToSection('projects')}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-neutral-950 font-medium text-sm hover:bg-neutral-200 transition-colors shadow-sm"
+          >
+            <span>精选项目</span>
+            <ArrowDown className="w-4 h-4" />
+          </button>
+
+          <a
+            href="https://github.com/eiritsu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-700 font-mono text-sm transition-all"
+          >
+            <GitBranch className="w-4 h-4" />
+            <span>github.com/eiritsu</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-neutral-500" />
+          </a>
+
+          <a
+            href="mailto:yoeiritsu@gmail.com"
+            className="inline-flex items-center gap-2 px-4 py-3 rounded-lg text-neutral-400 hover:text-neutral-200 text-sm font-mono transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            <span>yoeiritsu@gmail.com</span>
+          </a>
+        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.5 }}
-      >
-        <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-gray-400 dark:border-gray-600">
-          <motion.div
-            className="mt-2 h-2 w-1.5 rounded-full bg-gray-400 dark:bg-gray-600"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: easeInOut }}
-          />
-        </div>
-      </motion.div>
+      {/* Bottom Architectural Stats Bar */}
+      <div className="container-custom relative z-10 pt-16">
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-xl border border-neutral-800/80 bg-neutral-900/40 backdrop-blur-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          {stats.map((item, i) => (
+            <div key={i} className="px-4 py-2 border-r last:border-r-0 border-neutral-800/60">
+              <div className="flex items-baseline gap-1">
+                <span className="font-mono text-2xl sm:text-3xl font-semibold text-white tracking-tight">
+                  {item.value}
+                </span>
+                <span className="font-mono text-xs text-neutral-500">{item.unit}</span>
+              </div>
+              <p className="text-xs text-neutral-400 mt-1 font-mono tracking-wide">{item.label}</p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   )
 }

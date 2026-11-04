@@ -58,7 +58,7 @@ const projects: Project[] = [
     title: '企业级 AI Agent 桌面宿主环境',
     category: 'AI Infra',
     role: '企业侧架构与开发',
-    headline: 'DeepSeek Harness 运行时企业化改造与跨平台稳定发布',
+    headline: 'DeepSeek Harness 企业化改造与跨平台稳定发布',
     overview: '在官方开源桌面 Agent 框架基础上进行企业级增强改造，统一收敛会话持久化存储，设计自动化自检与回滚机制，保障长对话稳定性。',
     highlights: [
       '解决官方会话数据分散易损坏问题，收敛为 SQLite 单库事务管理',

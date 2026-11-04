@@ -41,12 +41,12 @@ export function Hero() {
         {/* Main Headline */}
         <div className="max-w-4xl space-y-6">
           <motion.h1
-            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white font-sans"
+            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white font-mono"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            杨永立 <span className="font-light text-neutral-500 text-3xl sm:text-5xl font-mono">/ Yoeiritsu</span>
+            Yoeiritsu
           </motion.h1>
 
           <motion.div

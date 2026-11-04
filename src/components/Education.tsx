@@ -47,9 +47,8 @@ export function Education() {
               </div>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-neutral-900 flex items-center justify-between text-xs font-mono text-neutral-500">
+            <div className="pt-6 mt-6 border-t border-neutral-900 text-xs font-mono text-neutral-500">
               <span>专业方向：计算机应用工程</span>
-              <span className="text-emerald-400/80">毕业证书验证完备</span>
             </div>
           </div>
 

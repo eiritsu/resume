@@ -12,7 +12,6 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 font-mono text-sm text-white font-bold tracking-wider">
               <span>Yoeiritsu</span>
-              <span className="text-neutral-500 font-normal">/ 杨永立</span>
             </div>
             <p className="font-mono text-xs text-neutral-500 mt-1">
               AI Agent 负责人 · 企业平台架构师 · 上海

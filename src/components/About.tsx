@@ -59,10 +59,6 @@ export function About() {
             </p>
             <div className="pt-4 border-t border-neutral-900 space-y-3">
               <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
-                <span className="text-neutral-500">坐标：</span>
-                <span className="text-neutral-200">上海 · 宝山</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
                 <span className="text-neutral-500">期望定位：</span>
                 <span className="text-neutral-200">AI Agent 负责人 / 企业 AI 平台架构师</span>
               </div>

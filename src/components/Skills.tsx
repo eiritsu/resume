@@ -10,7 +10,7 @@ const matrix = [
       'LangGraph / LangChain',
       'Dify / n8n 自动化编排',
       'Hermes Agent / OpenClaw',
-      'DeepSeek Harness 运行时',
+      'DeepSeek Harness',
       '多 Agent 协作与 Sub-Agent 隔离',
       'Prompt 流水线与上下文记忆压缩',
     ],

@@ -66,7 +66,6 @@ type ColorKey = keyof typeof colorMap
 
 interface Project {
   title: string
-  period: string
   category: string
   color: ColorKey
   techStack: string
@@ -81,7 +80,6 @@ interface Project {
 const projects: Project[] = [
   {
     title: '企业级 AI Agent 平台（DeepSeek Harness 企业版）',
-    period: '2026.08 – 至今',
     category: 'AI Agent 项目经历',
     color: 'blue',
     techStack: 'DeepSeek Harness / SQLite / Electron / Swift / OCR',
@@ -102,7 +100,6 @@ const projects: Project[] = [
   },
   {
     title: '统一身份认证平台与 AI Gateway（自研）',
-    period: '2026.08 – 至今',
     category: 'AI Agent 项目经历',
     color: 'purple',
     techStack: 'Go / Java Spring Boot / OIDC / OAuth2 / LDAP / 飞书开放平台 / SSE / WebSocket / Prometheus / Loki',
@@ -122,7 +119,6 @@ const projects: Project[] = [
   },
   {
     title: 'HireFlow — AI 智能招聘与简历初筛 Agent',
-    period: '2026.07 – 至今',
     category: 'AI Agent 项目经历',
     color: 'green',
     techStack: 'Rust Tauri v2 / React / TypeScript / LLM / OCR / 飞书开放平台',
@@ -142,7 +138,6 @@ const projects: Project[] = [
   },
   {
     title: '企业运营管理 SaaS 与 AI 预警',
-    period: '2026.09 – 至今',
     category: 'AI Agent 项目经历',
     color: 'teal',
     techStack: 'LLM / Docker / SQL / SSO / Playwright',
@@ -162,7 +157,6 @@ const projects: Project[] = [
   },
   {
     title: '飞书项目管理 Agent',
-    period: '2026.08 – 至今',
     category: 'AI Agent 项目经历',
     color: 'indigo',
     techStack: '飞书开放平台 / LLM',
@@ -180,7 +174,6 @@ const projects: Project[] = [
   },
   {
     title: '企业 AI 助手平台与业务 AI 应用',
-    period: '2025.08 – 2026.06',
     category: 'AI Agent 项目经历',
     color: 'orange',
     techStack: 'Dify / n8n / OpenClaw / OpenAI / Gemini / MiniMax / Python / FastAPI / Vue',
@@ -200,7 +193,6 @@ const projects: Project[] = [
   },
   {
     title: '专利本地知识库',
-    period: '2026.02 – 2026.03',
     category: 'AI Agent 项目经历',
     color: 'red',
     techStack: 'RAG / SQLite / Python',
@@ -218,7 +210,6 @@ const projects: Project[] = [
   },
   {
     title: '跨境网络降本与办公网络安全建设',
-    period: '2026.08 – 至今',
     category: 'IT 基础设施项目',
     color: 'blue',
     techStack: '华为 USG6000E / S5735 / WireGuard / SmartDNS',
@@ -237,7 +228,6 @@ const projects: Project[] = [
   },
   {
     title: '服务器虚拟化与终端标准化',
-    period: '2022.07 – 2024.09',
     category: 'IT 基础设施项目',
     color: 'purple',
     techStack: 'VMware / 超融合 / 桌面云 / AD / 组策略',
@@ -256,7 +246,6 @@ const projects: Project[] = [
   },
   {
     title: '全球网络与远程会议优化',
-    period: '2022.07 – 2024.09',
     category: 'IT 基础设施项目',
     color: 'green',
     techStack: 'SD-WAN / QoS / VPN',
@@ -273,7 +262,6 @@ const projects: Project[] = [
   },
   {
     title: '办公搬迁网络重构',
-    period: '2025.08 – 2025.09',
     category: 'IT 基础设施项目',
     color: 'teal',
     techStack: 'x86 软路由 / 开源 SSLVPN / Cisco',
@@ -290,7 +278,6 @@ const projects: Project[] = [
   },
   {
     title: 'IT 资产全生命周期与 AI 智能管理',
-    period: '2019.07 – 2026.06',
     category: 'IT 基础设施项目',
     color: 'indigo',
     techStack: 'Snipe-IT / RFID / LLM / Python',
@@ -308,7 +295,6 @@ const projects: Project[] = [
   },
   {
     title: 'Hermes Wiki — AI Agent 会话知识库插件',
-    period: '2025.07 – 2026.07',
     category: '开源项目',
     color: 'orange',
     techStack: 'Python / JavaScript / SQLite / LLM / Obsidian Markdown / 7语言i18n',
@@ -328,7 +314,6 @@ const projects: Project[] = [
   },
   {
     title: 'AI 会议纪要与候选人评估 Skill',
-    period: '2026.03 – 2026.06',
     category: '开源项目',
     color: 'red',
     techStack: 'ASR 服务 / 三段式 Prompt 流水线 / VAD 切片 / 多语言',
@@ -374,14 +359,8 @@ export function Projects() {
         <div className="space-y-6">
           {projects.map((project, index) => {
             const colors = colorMap[project.color]
-            const showCategory = index === 0 || projects[index - 1].category !== project.category
             return (
               <Fragment key={project.title}>
-              {showCategory && (
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6 pt-4 first:pt-0">
-                  {project.category}
-                </h3>
-              )}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -407,7 +386,7 @@ export function Projects() {
                       colors.badge
                     )}
                   >
-                    {project.period}
+                    {project.category}
                   </span>
                   <span
                     className={cn(

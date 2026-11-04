@@ -64,6 +64,16 @@ export function Footer() {
                   项目经历
                 </a>
               </li>
+              <li>
+                <a href="#experience" className="text-sm text-gray-400 transition-colors hover:text-white">
+                  工作经历
+                </a>
+              </li>
+              <li>
+                <a href="#education" className="text-sm text-gray-400 transition-colors hover:text-white">
+                  教育背景
+                </a>
+              </li>
             </ul>
           </div>
 

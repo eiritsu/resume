@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Fragment } from 'react'
 import { GitBranch, ArrowRight } from 'lucide-react'
 import { cn } from '../lib/utils'
 
@@ -66,6 +67,7 @@ type ColorKey = keyof typeof colorMap
 interface Project {
   title: string
   period: string
+  category: string
   color: ColorKey
   techStack: string
   role: string
@@ -78,232 +80,292 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: '企业级 AI Gateway 与统一身份治理平台 (Identity & AI Gateway)',
-    period: '2026.07 - 至今',
+    title: '企业级 AI Agent 平台（DeepSeek Harness 企业版）',
+    period: '炽云 · 2026.08 – 至今',
+    category: 'AI Agent 项目经历',
     color: 'blue',
-    techStack: 'Go / Java / OIDC & OAuth2 / OpenAI Protocol Adapter / 飞书API / Docker / Observability (Prometheus+Loki)',
-    role: '架构设计与核心研发',
+    techStack: 'DeepSeek Harness / SQLite / Electron / Swift / OCR',
+    role: '企业侧架构与核心研发',
     description:
-      '设计并落地企业级统一 AI 网关与统一身份访问治理平台。对上提供全兼容 OpenAI 协议的多模型统一路由、流式转发与配额限流；对下打通企业协作平台（飞书/钉钉）OIDC 单点登录与员工全生命周期账号自动化。',
+      '公司以 DeepSeek Harness 企业版作为全员 AI 助手平台，但官方存在 P0 级缺陷：数据分散存储易损坏、版本升级易导致系统崩溃、长时间对话后程序崩溃。',
     responsibilities: [
-      '主导 AI Gateway 架构研发（Go），实现多模型 Provider 协议适配、SSE/WebSocket 高并发流式转发、模型动态热更新与 Token 计量计费',
-      '实现企业 OIDC / OAuth2 身份治理网关（Java Spring Boot + Go），打通企业协同办公组织架构，支持免密登录、RBAC 细粒度权限控制与离职自动封禁',
-      '搭建企业级通知中心与工作流联动模块，支持消息/审批异步队列消费与跨系统事件分发',
-      '建立全链路可观测性体系（Grafana + Prometheus + Loki + Tempo），实现 API 审计日志追溯与异常流量实时告警',
+      '定位并修复缺陷：把分散的会话、工作区、插件、账号凭据统一存入一个数据库，杜绝数据错乱和损坏',
+      '设计"分步上线 ➔ 自动自检 ➔ 一键切换"的安全升级流程，升级失败可在毫秒级自动恢复到旧版本',
+      '重写长对话的记忆压缩逻辑，解决长时间对话后崩溃的问题',
+      '负责桌面客户端在 macOS / Windows 的迭代发布',
     ],
     achievements: [
-      '单节点支持高并发流式请求，平均转发延迟降低至 20ms 以内',
-      '实现员工入职、调岗、离职全流程账号自动化同步，权限生效/收回时间缩短至秒级',
-      '统一纳管企业内所有大模型调用流量，安全合规与成本审计覆盖率达 100%',
+      '40 名用户的运行环境无感切换',
+      '130.75GB 历史数据迁移零缺失、零损坏',
+      '每个版本通过自动化测试后发布',
     ],
-    highlights: ['OpenAI全协议兼容', '秒级账号生命周期', '高并发流式代理', '全链路可观测性'],
-  },
-  {
-    title: 'HireFlow — 企业级 AI 智能招聘与简历初筛平台',
-    period: '2026.07 - 至今',
-    color: 'purple',
-    techStack: 'Rust (Tauri v2) / React / TypeScript / Vite / TailWind CSS / LLM Pipeline / Document Parsing',
-    role: '独立全栈研发',
-    description:
-      '面向企业 HR 与技术面试官的高性能 AI 招聘平台，提供跨平台桌面端（macOS/Windows）与 Web 端双形态。支持多格式简历批量解析、AI 岗位 JD 智能生成与多维度候选人初筛评分。',
-    responsibilities: [
-      '采用 Rust (Tauri v2) + React + TypeScript 架构，完成跨平台原生桌面端应用与轻量 Web 端的全栈构建',
-      '研发本地/云端混合的多模态文档解析流水线，精准提取 PDF/Word 简历中的技能、履历与项目亮点',
-      '设计多轮 LLM 结构化初筛与评估 Prompt 链，实现候选人画像与岗位 JD 的深度匹配打分及风险项自动预警',
-      '实现数据导出与本地加密存储，保障候选人隐私数据在端侧与私有化环境中的安全合规',
-    ],
-    achievements: [
-      '单份简历结构化初筛时间从人工 15 分钟缩短至 10 秒以内，初筛效率提升 90%+',
-      '完成 macOS (ARM64) 与 Windows (x64) 跨平台安装包自动化打包与发布',
-      '成功应用于企业真实招聘场景，累计自动化处理数百份技术与管理岗位候选人评估',
-    ],
-    highlights: ['Rust+Tauri高性能桌面端', '10秒极速初筛', '跨平台原生支持', '多模态文档解析'],
-  },
-  {
-    title: 'DeepSeek Harness Desktop — AI Agent 桌面端宿主环境',
-    period: '2026.07 - 至今',
-    color: 'teal',
-    techStack: 'TypeScript / Electron / Swift (desktop-shell) / E2E Testing / LLM Replay Engine',
-    role: '开源贡献与桌面端研发',
-    description:
-      '基于 DeepSeek 开源生态的桌面端 Agent 宿主环境，集成原生桌面 Shell、端到端自动化测试套件与 LLM 行为回放机制，提供稳定可靠的本地 AI Agent 运行环境。',
-    responsibilities: [
-      '基于 Electron + Swift 原生桌面能力，重构单实例运行时管控与桌面端集成逻辑',
-      '维护并扩展端到端自动化测试套件（Snapshot & Replay），覆盖 Reasoning、Lifecycle、Queue Actions 等复杂交互场景',
-      '实现动态模型目录（Dynamic Catalog）与算力容量感知，提升 Agent 任务调度稳定性',
-    ],
-    achievements: [
-      '完成 macOS 原生 App 架构优化与单运行时约束，提升桌面端稳定性',
-      '构建 50+ 项端到端交互回归快照测试，保障 Agent 复杂执行流零退化',
-      'GitHub 个人开源发布与持续迭代维护',
-    ],
-    highlights: ['Agent桌面端Runtime', 'E2E测试快照', 'Swift原生集成', '开源项目'],
+    highlights: ['全员AI助手', '无感切换', '零缺失迁移', '跨平台发布'],
     github: 'https://github.com/eiritsu/DeepSeek-Harness-Desktop',
   },
   {
-    title: 'DeepSeek Plugin — 智能会话扩展与动态算力调度',
-    period: '2026.08 - 至今',
-    color: 'orange',
-    techStack: 'Python / TypeScript / Dynamic Capacities Engine / 企业协同平台Agent联动',
-    role: '独立设计与开发',
+    title: '统一身份认证平台与 AI Gateway（自研）',
+    period: '炽云 · 2026.08 – 至今',
+    category: 'AI Agent 项目经历',
+    color: 'purple',
+    techStack: 'Go / Java Spring Boot / OIDC / OAuth2 / LDAP / 飞书开放平台 / SSE / WebSocket / Prometheus / Loki',
+    role: '架构设计与核心研发',
     description:
-      '为 AI 会话环境打造的智能扩展插件，支持模型动态算力管理、实时协同办公会话发现以及企业聊天 Agent 节点的无缝集成。',
+      '公司各系统账号分散，员工使用大模型缺乏统一入口，权限、额度和费用难以管控。',
     responsibilities: [
-      '设计动态模型容量持久化（Dynamic Model Capacities）机制，实时感知并调整模型可用资源',
-      '开发企业协作平台（如飞书/Lark）实时会话自动发现与 Agent 节点配置管理',
-      '实现插件生命周期管控与热更新机制，提供高内聚、低耦合的扩展体验',
+      '以飞书账号作为全公司唯一登录入口，兼容 LDAP 打通内部旧系统，员工一次登录即可使用各应用，应用和权限按部门分配；支持内网、外网两种登录方式',
+      '自研 AI 网关，统一管理公司可用的大模型、访问密钥、调用额度与用量审计及告警；额度按"个人 > 所在部门 > 上级部门 > 全公司"逐级继承，修改后下一次调用即生效',
+      '接入监控与日志系统，统一规范 112 个模型名称',
     ],
     achievements: [
-      '实现模型算力与状态的动态自适应调度，降低 Agent 调用超时率',
-      '无缝对接企业即时通讯会话，支持多场景下的实时智能协同',
-      'GitHub 个人开源仓库管理',
+      '网关单节点延迟 <20ms，支持 AI 回答实时流式输出',
+      '8 个内部系统完成统一登录与统一模型调用入口',
+      '模型调用额度与费用可按人、按部门出账',
     ],
-    highlights: ['动态算力持久化', '企业协同会话联动', '模块化插件架构', '开源项目'],
-    github: 'https://github.com/eiritsu/DeepSeek-Plugin',
+    highlights: ['统一身份', '模型网关', '额度分级继承', '流式输出'],
+  },
+  {
+    title: 'HireFlow — AI 智能招聘与简历初筛 Agent',
+    period: '炽云 · 2026.07 – 至今',
+    category: 'AI Agent 项目经历',
+    color: 'green',
+    techStack: 'Rust Tauri v2 / React / TypeScript / LLM / OCR / 飞书开放平台',
+    role: '独立全栈研发',
+    description:
+      'HR 人工初筛简历耗时长，存在"注水简历"，面试安排与评价分散在多个工具中。',
+    responsibilities: [
+      '搭建 AI 初筛：自动读取简历（含扫描件识别），按岗位要求打分，识别注水简历并提示候选人风险，并可自动生成 JD',
+      '建设人才库：支持批量导入，自动识别重复简历并保留历史版本',
+      '打通飞书：自动发送通知、创建面试日程、预约 / 改期 / 取消会议室，两位面试官分别独立评价；HR 复核任务自动分配与释放，避免重复处理',
+      '交付 macOS / Windows 桌面端与网页端，并编写使用手册，HR 可独立使用',
+    ],
+    achievements: [
+      '单份简历初筛由人工约 15 分钟缩短至 10 秒内',
+      '实现"简历识别 ➔ AI 评分 ➔ HR 复核 ➔ 面试安排 ➔ 评价记录"全流程线上闭环',
+    ],
+    highlights: ['10秒初筛', '飞书全链路', '桌面端交付', '注水简历识别'],
+  },
+  {
+    title: '企业运营管理 SaaS 与 AI 预警',
+    period: '炽云 · 2026.09 – 至今',
+    category: 'AI Agent 项目经历',
+    color: 'teal',
+    techStack: 'LLM / Docker / SQL / SSO / Playwright',
+    role: '架构与核心研发',
+    description:
+      '销售、采购、库存、物流、制造、项目、HR 七大业务板块流程分散，业务异常主要靠人工发现。',
+    responsibilities: [
+      '搭建七大板块统一的业务提交与审批平台，每家客户企业可自行设置审批方式（单人审批 / 依次会签 / 同时会签）、处理时限和撤回规则',
+      '自研审批流程引擎：自动检查流程配置错误（如死循环、走不通的节点），防止重复发起，AI 处理不了的事项自动转人工',
+      '设计 AI 双重预警：员工可随时让 AI 分析业务数据，系统也按设定频率（5 分钟至 24 小时）自动巡检七大板块，推送预警与待办且不重复打扰',
+      '完成数据库、部署方式与登录系统重构及历史数据迁移',
+    ],
+    achievements: [
+      '七大板块全部通过自动化浏览器验收，411/411 项测试通过',
+      '生产环境部署运行正常，保留可随时回退的版本与数据库备份',
+    ],
+    highlights: ['七大板块', 'AI双重预警', '411/411测试', '流程引擎自研'],
+  },
+  {
+    title: '飞书项目管理 Agent',
+    period: '炽云 · 2026.08 – 至今',
+    category: 'AI Agent 项目经历',
+    color: 'indigo',
+    techStack: '飞书开放平台 / LLM',
+    role: '独立设计与开发',
+    description:
+      '项目沟通散落在各个群聊中，待办事项和周报依赖人工整理。',
+    responsibilities: [
+      '开发飞书机器人：自动归档群聊消息，实时拆分、合并、转交待办，支持用自然语言查找工作记录、自动生成个人周报',
+      '支持导入飞书妙记会议记录、生成 PPT / Excel；主模型故障时自动切换备用模型（三级切换）',
+    ],
+    achievements: [
+      '每周一 08:30 自动推送待办、周五 17:00 自动推送项目周报',
+    ],
+    highlights: ['群聊转待办', '自动周报', '三级模型切换'],
+  },
+  {
+    title: '企业 AI 助手平台与业务 AI 应用',
+    period: '恒方 · 2025.08 – 2026.06',
+    category: 'AI Agent 项目经历',
+    color: 'orange',
+    techStack: 'Dify / n8n / OpenClaw / OpenAI / Gemini / MiniMax / Python / FastAPI / Vue',
+    role: '平台搭建与业务落地',
+    description:
+      '知识产权咨询公司，三地办公；客户邮件跟进、合同审核、周报等工作大量依赖人工。',
+    responsibilities: [
+      '搭建公司 AI 平台，接入多家大模型，开发按任务难易程度自动选择模型的中间程序；打通钉钉 / 飞书 / 企微单点登录',
+      'CRM 邮件 AI（2025.12 – 2026.06）：自动给客户邮件分级、提取意向线索、生成客户画像，识别高价值客户',
+      'AI 合同审核（2025.12 – 2026.06）：自动标出风险条款并给出修改建议',
+      'AI 周报与表单预审：Marketing 周报由人工做 PPT 改为自动生成；12 类行政与业务表单采用"AI 预审 + 人工复核"',
+      '自研 AI 轻量 ERP + 数据看板（2025.10 起），AI 可直接读取业务数据进行分析汇总',
+    ],
+    achievements: [
+      '大模型调用成本降低 30%',
+      '3000+ 封客户邮件分类准确率 95%，高价值客户识别准确率 78%',
+      '合同审核时间节省 70%+（用户反馈）',
+      '周报耗时从 1–2 天缩短至 3 小时内',
+      'ERP 核心模块 1 人 30 天上线',
+    ],
+    highlights: ['成本降30%', '95%分类准确率', '合同审核省时70%', '1人30天上线'],
+  },
+  {
+    title: '专利本地知识库',
+    period: '恒方 · 2026.02 – 2026.03',
+    category: 'AI Agent 项目经历',
+    color: 'red',
+    techStack: 'RAG / SQLite / Python',
+    role: '主导开发',
+    description:
+      '业务部门需要快速检索 Google Patents 专利数据，常规 AI 知识库方案（向量检索 RAG）找得不准。',
+    responsibilities: [
+      '评估后放弃常规方案，改为按"行业 ➔ 地区 ➔ 专利"分层目录组织数据，完成数据清洗入库与定期增量更新，并提供查询接口',
+    ],
+    achievements: [
+      '检索命中率由约 60% 提升至 95%+，查询响应 <200ms',
+      '本地部署，不依赖外部服务',
+    ],
+    highlights: ['60% ➔ 95%命中率', '<200ms响应', '零外部依赖'],
+  },
+  {
+    title: '跨境网络降本与上海办公室网络安全建设',
+    period: '炽云 · 2026.08 – 至今',
+    category: 'IT 基础设施项目',
+    color: 'blue',
+    techStack: '华为 USG6000E / S5735 / WireGuard / SmartDNS',
+    role: '方案设计 + 实施交付',
+    description:
+      '公司跨境访问依赖 SD-WAN 专线，费用高；上海办公室网络需要重新建设。',
+    responsibilities: [
+      '完成电信固定 IP 专线从拉光纤、装机到开通割接的全过程；完成华为防火墙与交换机验收上线，按端口划分网络隔离，并编写运维文档',
+      '自建新加坡海外双节点互为备份，配合智能 DNS 分流与 VPN，替代原 SD-WAN 专线',
+      '自研网络运行中心（NOC），统一监控网络设备和员工电脑，实时显示网络流量',
+    ],
+    achievements: [
+      '每月为公司节省 3～7 万元',
+      '专线资费谈判由 2388 元/月降至 1194 元/月',
+      '跨境访问稳定性同步提升',
+    ],
+    highlights: ['月省3~7万', '专线对折', '自研NOC', '端口级隔离'],
+  },
+  {
+    title: '服务器虚拟化与终端标准化',
+    period: '云鹊 / 恒方 · 2023.05 – 2024.09',
+    category: 'IT 基础设施项目',
+    color: 'purple',
+    techStack: 'VMware / 超融合 / 桌面云 / AD / 组策略',
+    role: '主导设计与实施',
+    description:
+      '公司电脑配置不统一、故障多，服务器资源利用率低。',
+    responsibilities: [
+      '统一封装 Windows 系统镜像，配合 AD 域与组策略统一管理全员电脑',
+      '搭建虚拟化集群（VMware + 超融合 + 桌面云），承载核心业务系统',
+    ],
+    achievements: [
+      '电脑故障率 1 年内降低 60%',
+      '核心业务可用性 99.99%（年停机 ≤6 小时）',
+      '服务器利用率从 30% 提升至 70%',
+    ],
+    highlights: ['故障率降60%', '可用性99.99%', '利用率30%➔70%'],
+  },
+  {
+    title: '全球网络与远程会议优化',
+    period: '云鹊 / 恒方 · 2023.05 – 2024.09',
+    category: 'IT 基础设施项目',
+    color: 'green',
+    techStack: 'SD-WAN / QoS / VPN',
+    role: '主导实施',
+    description:
+      '跨国视频会议卡顿，SD-WAN 通信费用高。',
+    responsibilities: [
+      '调整全球网络节点，对 Zoom 视频流量专项优化，设置带宽优先级与加密通道；网络分层隔离，支持多终端安全接入，并为重要会议提供全程保障',
+    ],
+    achievements: [
+      '高清视频流畅度 98%+',
+      '每年节省 SD-WAN 通信成本 17 万元',
+    ],
+    highlights: ['流畅度98%+', '年省17万'],
+  },
+  {
+    title: '办公搬迁网络重构',
+    period: '恒方 · 2025.08 – 2025.09',
+    category: 'IT 基础设施项目',
+    color: 'teal',
+    techStack: 'x86 软路由 / 开源 SSLVPN / Cisco',
+    role: '方案设计与实施',
+    description:
+      '公司搬迁，需用 2014 年的老旧思科设备异地组网，原有 VPN 不兼容 Win10 及以上系统。',
+    responsibilities: [
+      '用 x86 服务器搭建软路由和防火墙，替代性能衰减的老硬件；部署开源 VPN 解决远程办公接入；制定 IP 规划与切换方案，快速完成重建',
+    ],
+    achievements: [
+      '零硬件采购预算完成升级',
+      '搬迁期间业务系统 0 停机、0 数据丢失',
+    ],
+    highlights: ['零预算升级', '0停机0丢失'],
+  },
+  {
+    title: 'IT 资产全生命周期与 AI 智能管理',
+    period: '东伽 / 云鹊 / 恒方 · 2019.07 – 2026.06',
+    category: 'IT 基础设施项目',
+    color: 'indigo',
+    techStack: 'Snipe-IT / RFID / LLM / Python',
+    role: '二次开发 + 架构设计',
+    description:
+      '设备数量多，人工盘点慢、易出错，设备故障难以提前发现。',
+    responsibilities: [
+      '资产数字化（2019 起）：引入 Snipe-IT 资产系统 + RFID 标签，覆盖采购、领用、维修、报废全流程，以"RFID + 网络扫描"替代逐台人工盘点',
+      'AI 智能管理（2025 起）：二次开发接入大模型，自动扫描发现网络设备、自动生成安全审计报告、根据历史工单预测易故障设备',
+    ],
+    achievements: [
+      '资产数字化累计管理 1800+ 台设备',
+      'AI 阶段（2025 起）实现 90% 设备自动发现，审计报告 4 天 ➔ 30 分钟，设备故障率降低 30%，维护成本降低 25%',
+    ],
+    highlights: ['1800+设备', '90%自动发现', '4天➔30分钟', '故障率降30%'],
   },
   {
     title: 'Hermes Wiki — AI Agent 会话知识库插件',
-    period: '2026.07',
-    color: 'indigo',
+    period: '独立开发 · 2025.07 – 2026.07',
+    category: '开源项目',
+    color: 'orange',
     techStack: 'Python / JavaScript / SQLite / LLM / Obsidian Markdown / 7语言i18n',
     role: '独立开发并开源',
     description:
-      '基于 Karpathy LLM Wiki 模式，为 Hermes AI Agent 开发的会话知识库插件。自动将 AI 会话转为 Obsidian 风格 Wiki 页面，支持质量评分、主题分类、实体提取，含 Desktop 侧边栏 GUI 和 Gateway RPC 后端。',
+      '基于 Karpathy LLM Wiki 模式，自动将 AI 会话转为 Obsidian 风格 Wiki 页面，支持质量评分、主题分类与实体提取。',
     responsibilities: [
       '设计双模式架构：Extension 模式（与 Holographic Memory 共享连接）和 Standalone 模式（独立 SQLite 存储）',
       '开发 LLM 驱动的会话分析引擎，自动生成 Obsidian 风格 Wiki 页面（frontmatter、wiki-link、tag）',
-      '实现质量评分系统（1-5分），自动清理低质量页面，只保留精品内容',
-      '开发 Desktop 侧边栏 GUI 插件：支持查看、新建、编辑、删除、多选批量操作和导出',
-      '编写 install.sh 自动安装脚本，支持 Gateway RPC 补丁自动检测与应用',
+      '实现质量评分系统（1-5 分），自动清理低质量页面，只保留精品内容',
+      '开发 Desktop 侧边栏 GUI 插件，支持查看、新建、编辑、删除、多选批量操作和导出',
     ],
     achievements: [
-      '支持 7 语言 i18n（中/英/日/韩/德/法/西）',
+      '支持 7 语言 i18n（中 / 英 / 日 / 韩 / 德 / 法 / 西）',
       'Python 67.8% + JavaScript 29.6% 全栈独立开发',
-      'GitHub 开源：github.com/eiritsu/hermes-wiki-plugin',
     ],
     highlights: ['Karpathy LLM Wiki模式', '7语言i18n', '全栈独立开发', '开源项目'],
     github: 'https://github.com/eiritsu/hermes-wiki-plugin',
   },
   {
-    title: 'AI 会议纪要总结与候选人评估 Skill',
-    period: '2026.03 - 2026.06',
-    color: 'green',
-    techStack: 'ASR服务 / 三段式Prompt流水线 / VAD切片 / 响度归一化 / 多语言(中/英/日/韩)',
+    title: 'AI 会议纪要与候选人评估 Skill',
+    period: '独立开发 · 2026.03 – 2026.06',
+    category: '开源项目',
+    color: 'red',
+    techStack: 'ASR 服务 / 三段式 Prompt 流水线 / VAD 切片 / 响度归一化 / 多语言',
     role: '设计并开发 Agent Skill',
     description:
-      '设计并开发会议/面试音频转结构化纪要的 Agent Skill，支持多语言识别与智能摘要生成，已迭代至 v2.0。',
+      '设计并开发会议 / 面试音频转结构化纪要的 Agent Skill，支持多语言识别与智能摘要生成，已迭代至 v2.0。',
     responsibilities: [
       '集成 ASR 服务，完成长音频自动切片、VAD 静音检测与说话人识别',
-      '搭建三段式 prompt 流水线与 SQLite 结构化存储',
+      '搭建三段式 Prompt 流水线与 SQLite 结构化存储',
       '已应用于正式办公场景与技术面试候选人评估流程，持续迭代优化',
     ],
     achievements: [
-      '1 小时会议录音→结构化纪要压缩至 15 分钟以内',
-      '替代第三方商业产品，大幅节省外购成本',
+      '1 小时会议录音 ➔ 结构化纪要压缩至 15 分钟以内',
+      '替代第三方商业产品，节省外购成本',
     ],
     highlights: ['15分钟内出纪要', '多语言支持', '开源项目', '面试评估闭环'],
     github: 'https://github.com/eiritsu/meeting-minutes-interview',
   },
-  {
-    title: 'Google Patents 本地知识库构建',
-    period: '2026.02 - 2026.03',
-    color: 'teal',
-    techStack: 'SQLite / 树形Wiki架构 / 全文检索 / 增量同步',
-    role: '主导开发',
-    description:
-      '基于 Google Patents 公开数据，搭建企业本地 Patents 知识库，主动放弃高误差向量方案改用树形结构 Wiki 架构。',
-    responsibilities: [
-      '调研并测试 RAG 向量数据库方案，发现向量召回误差大、上下文关联性差，主动放弃改用树形结构 Wiki 架构',
-      '设计树形分类目录（按行业→区域→合作伙伴层级），完成 Patents 数据的结构化清洗与入库',
-      '基于 SQLite 实现本地轻量化存储，开发增删改查与全文检索接口',
-      '编写数据更新脚本，实现数据定期同步与增量更新',
-    ],
-    achievements: [
-      '树形结构检索准确率较向量方案提升显著，业务查询命中率从约 60% 提升至 95%+',
-      'SQLite 本地部署零外部依赖，查询响应时间 <200ms',
-    ],
-    highlights: ['95%+查询命中率', '<200ms响应', '零外部依赖'],
-  },
-  {
-    title: 'CRM 邮件 AI 化与客户画像侧写',
-    period: '2025.12 - 2026.06',
-    color: 'blue',
-    techStack: 'LLM / 开源CRM / Marketing协作',
-    role: '主导开发',
-    description:
-      '基于 LLM + 开源 CRM 系统，构建客户往来邮件智能分析与客户画像自动生成能力，赋能 Marketing 团队精准营销。',
-    responsibilities: [
-      '负责完成客户往来邮件的自动分析与智能分类',
-      '完成客户画像的自动生成与标签体系建设',
-      '配合业务部门持续优化模型准确率',
-    ],
-    achievements: [
-      '累计处理 3000+ 封客户邮件，分类准确率达 95%',
-      '高价值客户识别准确率达 78%',
-    ],
-    highlights: ['95%分类准确率', '78%高价值识别率', '3000+邮件处理'],
-  },
-  {
-    title: 'AI 合同审核模块',
-    period: '2025.12 - 2026.06',
-    color: 'purple',
-    techStack: 'LLM / 历史合同数据训练',
-    role: '部署与开发',
-    description:
-      '部署 LLM 合同审核模块，实现风险条款自动标注与修改建议生成，大幅提升法务审核效率。',
-    responsibilities: [
-      '完成风险条款的自动标注与修改建议生成',
-      '基于历史合同数据训练风险识别模型',
-    ],
-    achievements: [
-      '上线后同事反馈节省 70% 以上审核时间',
-      '风险条款识别准确率高',
-    ],
-    highlights: ['70%+时间节省', '高准确率识别'],
-  },
-  {
-    title: '企业网络安全与等保 2.0 改造',
-    period: '2023.05 - 2024.09',
-    color: 'red',
-    techStack: '双防火墙(飞塔+USG6000) / VRRP / 华为AC / SDN威胁情报 / AD域 / VPN',
-    role: '主导构建',
-    description:
-      '主导构建双防火墙主备架构，实施等保 2.0 三级安全改造，全面提升企业网络安全防护能力。',
-    responsibilities: [
-      '配置华为 AC 控制器及访客隔离策略',
-      '实施 AD 域统一身份认证、行为审计与 VPN 加密隧道',
-      '配合公安机关完成网络安全审查',
-    ],
-    achievements: [
-      '核心业务网络可用性达 99.99%',
-      '阻断 DDoS 攻击，检测效率提升 60%',
-      '通过等保 2.0 三级认证',
-    ],
-    highlights: ['99.99%可用性', '等保三级认证', 'DDoS阻断'],
-  },
-  {
-    title: 'IT 资产全生命周期与 AI 智能管理',
-    period: '多阶段',
-    color: 'indigo',
-    techStack: 'Snipe-IT二次开发 / LLM / fping+ARP+端口扫描 / RFID / 故障预测模型',
-    role: '基于 Snipe-IT 二次开发接入 LLM',
-    description:
-      '基于 Snipe-IT 二次开发，接入 LLM 构建 AI 资产管理体系，覆盖 IT 设备全生命周期管理。',
-    responsibilities: [
-      '完成 Snipe-IT 资产管理系统的二次开发，接入 LLM 实现网络设备全探测',
-      '完成 AI 辅助安全审计模块开发与故障预测',
-      '实现 RFID 标签 + 网络扫描的自动化盘点策略',
-      '覆盖设备登记、领用、维修、报废的全流程数字化管理',
-    ],
-    achievements: [
-      'AI 接入后实现设备 90% 自动发现，盘点准确率达 99% 以上',
-      '安全审计报告生成时间从 4 天缩短至 30 分钟',
-      '设备故障率降低 30%，维护成本降低 25%',
-    ],
-    highlights: ['90%自动发现', '99%盘点准确率', '4天→30分钟', '故障率降30%'],
-  },
 ]
-
 export function Projects() {
   return (
     <section id="projects" className="py-20 px-4">
@@ -332,9 +394,15 @@ export function Projects() {
         <div className="space-y-6">
           {projects.map((project, index) => {
             const colors = colorMap[project.color]
+            const showCategory = index === 0 || projects[index - 1].category !== project.category
             return (
+              <Fragment key={project.title}>
+              {showCategory && (
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6 pt-4 first:pt-0">
+                  {project.category}
+                </h3>
+              )}
               <motion.div
-                key={project.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-30px' }}
@@ -459,6 +527,7 @@ export function Projects() {
                   </a>
                 )}
               </motion.div>
+              </Fragment>
             )
           })}
         </div>

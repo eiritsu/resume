@@ -5,10 +5,18 @@ const education = [
   {
     id: 'swju',
     school: '西南交通大学',
-    degree: '本科',
+    degree: '本科（专升本）',
     major: '计算机科学与技术',
     period: '2018 - 2021',
     description: '专升本，系统学习计算机基础理论、数据结构、算法、操作系统、计算机网络、数据库原理等核心课程',
+  },
+  {
+    id: 'sbs',
+    school: '上海商学院',
+    degree: '大专（全日制）',
+    major: '连锁经营与管理',
+    period: '2014 - 2017',
+    description: '全日制专科阶段，为后续专升本打下基础',
   },
 ]
 

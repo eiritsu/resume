@@ -3,6 +3,28 @@ import { cn } from '../lib/utils'
 
 const experiences = [
   {
+    id: 'chiyun',
+    company: '浙江炽云科技有限公司',
+    period: '2026.07 – 至今',
+    location: '上海 / 南京',
+    role: 'AI 架构师',
+    reportTo: 'CTO / CEO / COO',
+    companySize: '100 人以下',
+    responsibilities: [
+      '负责公司 AI 平台与业务 AI 应用从 0 建设，10 周内完成 6 套系统 Demo 与阶段开发（7–9 月累计 417.75 工时）；兼管网络与信息安全基础设施',
+      '主导企业级 AI Agent 平台、统一身份认证与 AI Gateway、AI 招聘、运营管理 SaaS、采购询比价、飞书项目管理等系统建设',
+      '负责 ICP 备案 / 大模型登记 / 算法备案规划，银狐病毒应急处置与备机容灾，Dell 服务器虚拟化',
+      '完成电信固定 IP 专线割接与华为网管设备验收，自建海外节点替代 SD-WAN 专线',
+      '面试 AI Agent 工程师 10+ 场',
+    ],
+    achievements: [
+      '8 个内部业务系统接入统一身份与统一模型调用入口',
+      '企业 AI 平台入职 10 周从 0 建成并上线',
+      '跨境链路每月节省 3～7 万元运营成本',
+      'ICP 备案、大模型登记、算法备案、等保三级并行推进',
+    ],
+  },
+  {
     id: 'hengfang',
     company: '恒方知识产权咨询',
     period: '2025.08 – 2026.06',
@@ -17,8 +39,6 @@ const experiences = [
       '搭建 AI 周报自动生成组件，完成 Marketing 汇报从传统 PPT 撰写到自动化生成的转型',
       '部署 LLM 合同审核模块，完成风险条款的自动识别与修改建议生成',
       '主导 CRM/ERP/OA 跨部门数据打通项目，完成数据流串通与业务规则引擎搭建，项目周期 1 个月',
-      '负责公司境外 SaaS 平台（Google/Ins/WhatsApp 等）的账号管理与海外线路部署，应对账号封禁与跨境合规风险',
-      '负责公司 CRM、财务（用友）、OA（致远/泛微）、费控等业务系统的日常运维管理',
       '搭建基于 Fedora/Ubuntu 的 Dify + n8n 容器化 AI 平台，完成钉钉/飞书/企微 SSO 全打通',
       '使用老旧服务器搭建开源防火墙防护和行为审计方案，配合公安机关完成网络安全审查',
       '负责三地 200+ 设备的 Snipe-IT + RFID 数字化全生命周期管理',
@@ -27,8 +47,25 @@ const experiences = [
       '完成客户邮件的自动分类与客户画像侧写，分类准确率达 95%，高价值客户识别准确率达 78%，累计处理 3000+ 封',
       '完成 Marketing 周报自动生成，汇报效率提升 30-40%，从 1-2 天缩短至 3 小时内',
       '完成 AI 合同审核模块上线，同事反馈节省 70% 以上的审核时间',
-      '完成跨部门数据打通项目，业务数据准确率显著提升，项目周期仅 1 个月',
+      '完成跨部门数据打通项目，项目周期仅 1 个月',
       '实现三地 IT 架构的统一管理，S1 工单 30 分钟响应率达 100%，全年零安全事故',
+    ],
+  },
+  {
+    id: 'fde',
+    company: '独立 AI FDE（Forward Deployed Engineer，自由职业）',
+    period: '2024.09 – 2025.08',
+    location: '远程 / 客户现场',
+    role: 'AI 应用落地工程师',
+    reportTo: '客户方',
+    companySize: '自由职业',
+    responsibilities: [
+      '通过 Google 等公开资料系统自学 AI 应用开发；基于 Dify / LangGraph / LangChain 为企业客户驻场落地 AI 应用',
+      '主要场景：发票识别（发票 OCR 与结构化提取）、合同文本生成。【阳璞新能源】',
+    ],
+    achievements: [
+      '完成从自学到客户驻场交付的完整闭环',
+      '独立承担发票 OCR 与结构化提取、合同文本生成两个场景落地',
     ],
   },
   {
@@ -103,7 +140,6 @@ const experiences = [
     ],
   },
 ]
-
 export function Experience() {
   return (
     <section id="experience" className="section bg-gray-50 dark:bg-gray-900">
@@ -117,7 +153,7 @@ export function Experience() {
         >
           <h2 className="text-title-1 md:text-display-3">工作经历</h2>
           <p className="mt-4 text-callout text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            从技术支持到 IT Director，跨越四家企业，累计管理 1000+ 终端、多地 IT 架构与 AI 业务落地
+            从 IT 技术支持到 AI 架构师，跨越五家企业 + 一段独立交付，累计管理 1000+ 终端、多地 IT 架构与 AI 业务落地
           </p>
         </motion.div>
 

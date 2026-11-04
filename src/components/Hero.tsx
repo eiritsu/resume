@@ -18,7 +18,7 @@ const socialLinks = [
 ]
 
 const badges = [
-  { text: 'IT Director' },
+  { text: 'AI Agent 负责人' },
   { text: '8年经验' },
   { text: '上海', icon: MapPin },
 ]
@@ -74,7 +74,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.3, ease: easeOut }}
           className="mb-10 max-w-2xl text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
         >
-          8年+IT运维技术和管理经验，负责企业信息化、团队管理。近3年负责构建企业AI落地项目。
+          8 年甲方 IT 管理经验，近 3 年专注企业 AI Agent 落地。主导企业 AI 平台（统一身份 / 模型网关 / Agent 运行时）与 IT 基础设施两条线，交付 8 个内部业务系统。
         </motion.p>
 
         {/* CTA buttons */}

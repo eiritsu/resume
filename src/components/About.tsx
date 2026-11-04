@@ -19,55 +19,55 @@ const strengths = [
     title: '8年甲方IT管理经验',
     icon: Briefcase,
     color: 'blue',
-    description: '5年基础设施运维+团队管理，3年AI业务化落地',
+    description: '6年团队管理 + 3年AI业务化落地，最小团队独立负责三地IT',
   },
   {
-    title: '精通AI工具业务落地',
-    icon: Cpu,
-    color: 'purple',
-    description: '企业级AI Gateway、HireFlow智能初筛、CRM邮件分析等',
-  },
-  {
-    title: '熟悉企业业务系统实施运维',
-    icon: Server,
-    color: 'green',
-    description: '用友BIP ERP、金蝶K3、致远/泛微OA等',
-  },
-  {
-    title: '全栈自研AI组件与客户端能力',
-    icon: Code2,
-    color: 'orange',
-    description: 'Go/Java网关、Rust/Tauri与Electron桌面端、Python流水线',
-  },
-  {
-    title: '掌握主流AI Agent框架与生态',
+    title: '企业AI平台从0建设',
     icon: Bot,
-    color: 'teal',
-    description: 'DeepSeek生态、Hermes、LangGraph、Dify、Tauri v2等',
-  },
-  {
-    title: '跨部门数据架构设计能力',
-    icon: Network,
-    color: 'indigo',
-    description: '主导CRM/ERP/OA跨部门数据打通',
-  },
-  {
-    title: '项目团队领导能力',
-    icon: Users,
-    color: 'red',
-    description: '5人IT团队+多地外包协作',
-  },
-  {
-    title: '多厂商网络安全设备实战',
-    icon: Shield,
-    color: 'blue',
-    description: 'Cisco ASA、华为USG、深信服AC等',
-  },
-  {
-    title: '境外SaaS与跨境网络经验',
-    icon: Globe,
     color: 'purple',
-    description: '境外账号管理',
+    description: '统一身份 + AI Gateway + Agent运行时，8个内部系统统一登录',
+  },
+  {
+    title: 'AI Agent 全链路落地',
+    icon: Cpu,
+    color: 'green',
+    description: '招聘、运营预警、合同审核、客户画像、项目管理、会议纪要',
+  },
+  {
+    title: '模型接入与成本治理',
+    icon: Server,
+    color: 'orange',
+    description: '多模型按任务路由、额度分级继承、用量按人出账可对账',
+  },
+  {
+    title: '基础设施与跨境网络',
+    icon: Network,
+    color: 'teal',
+    description: '专线割接、华为设备验收、虚拟化集群、自建海外节点',
+  },
+  {
+    title: '安全合规与备案',
+    icon: Shield,
+    color: 'indigo',
+    description: '等保2.0三级、ICP备案、大模型登记、算法备案',
+  },
+  {
+    title: '多厂商网络安全实战',
+    icon: Globe,
+    color: 'red',
+    description: '华为USG、Cisco ASA、飞塔、深信服AC、WireGuard、SmartDNS',
+  },
+  {
+    title: '全栈自研能力',
+    icon: Code2,
+    color: 'blue',
+    description: 'Go/Java/Rust/Python/TypeScript，桌面端与网关自研',
+  },
+  {
+    title: '团队与跨部门推动',
+    icon: Users,
+    color: 'purple',
+    description: '5人团队+多地外包，25+份SOP，面试AI Agent工程师10+场',
   },
 ]
 
@@ -109,7 +109,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
   },
 }
 
-const tags = ['上海', '20-30K', 'IT Director / IT Manager', '8年经验']
+const tags = ['上海', '35-40K', 'AI Agent 负责人 / 企业 AI 平台架构师', '8年经验']
 
 const ease = [0.25, 0.1, 0.25, 1] as [number, number, number, number]
 
@@ -178,20 +178,20 @@ export function About() {
                 Yoeiritsu
               </h3>
               <p className="text-lg text-blue-600 dark:text-blue-400 mt-1 font-medium">
-                IT Director / IT Manager
+                AI Agent 负责人 / 企业 AI 平台架构师
               </p>
             </div>
 
             {/* Intro paragraphs */}
             <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
-                拥有8年甲方IT管理经验，前5年专注于基础设施运维与团队管理，后3年深耕AI业务化落地，成功推动多个AI项目在企业中实际应用。
+                近 3 年专注企业 AI Agent 业务化落地，覆盖需求、架构、开发到上线运维的完整闭环。主导从 0 搭建公司级 AI 平台，员工用飞书账号一次登录即可使用，统一管理各部门可用的大模型、调用额度与费用，系统升级出错可自动恢复。
               </p>
               <p>
-                熟悉企业级业务系统（ERP、OA、CRM）的选型、实施与运维，具备Python+LLM自研AI组件能力，能独立完成从需求分析到部署落地的全流程。
+                业务场景已交付：招聘、运营预警、合同审核、客户画像、项目管理、会议纪要、专利知识库等 AI 应用，能根据实际效果选型（专利检索准确率从约 60% 提升至 95%+）。
               </p>
               <p>
-                擅长跨部门沟通与数据架构设计，具备项目团队领导能力，能有效协调内部团队与外包资源，确保项目高质量交付。
+                IT 管理背景是差异化优势：熟悉 ERP / OA / CRM 与跨部门数据打通、网络安全与等保 2.0 三级、ICP / 大模型登记 / 算法备案，能让 AI 真正接入企业系统并合规上线。带过 5 人 IT 团队 + 多地外包，沉淀 25+ 份 SOP，面试 AI Agent 工程师 10+ 场。
               </p>
             </div>
 

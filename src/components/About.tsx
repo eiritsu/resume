@@ -2,13 +2,10 @@ import { motion } from 'framer-motion'
 import {
   Briefcase,
   Cpu,
-  Server,
   Code2,
   Bot,
   Network,
-  Users,
   Shield,
-  Globe,
   Mail,
   GitBranch,
 } from 'lucide-react'
@@ -34,12 +31,6 @@ const strengths = [
     description: '招聘、运营预警、合同审核、客户画像、项目管理、会议纪要',
   },
   {
-    title: '模型接入与成本治理',
-    icon: Server,
-    color: 'orange',
-    description: '多模型按任务路由、额度分级继承、用量按人出账可对账',
-  },
-  {
     title: '基础设施与跨境网络',
     icon: Network,
     color: 'teal',
@@ -52,22 +43,10 @@ const strengths = [
     description: '等保2.0三级、ICP备案、大模型登记、算法备案',
   },
   {
-    title: '多厂商网络安全实战',
-    icon: Globe,
-    color: 'red',
-    description: '华为USG、Cisco ASA、飞塔、深信服AC、WireGuard、SmartDNS',
-  },
-  {
     title: '全栈自研能力',
     icon: Code2,
-    color: 'blue',
+    color: 'orange',
     description: 'Go/Java/Rust/Python/TypeScript，桌面端与网关自研',
-  },
-  {
-    title: '团队与跨部门推动',
-    icon: Users,
-    color: 'purple',
-    description: '5人团队+多地外包，25+份SOP，面试AI Agent工程师10+场',
   },
 ]
 
@@ -185,13 +164,10 @@ export function About() {
             {/* Intro paragraphs */}
             <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
-                近 3 年专注企业 AI Agent 业务化落地，覆盖需求、架构、开发到上线运维的完整闭环。主导从 0 搭建公司级 AI 平台，员工用飞书账号一次登录即可使用，统一管理各部门可用的大模型、调用额度与费用，系统升级出错可自动恢复。
+                近 3 年专注企业 AI Agent 业务化落地，主导从 0 搭建公司级 AI 平台：员工用飞书账号一次登录即可使用，统一管理各部门可用的大模型、调用额度与费用，系统升级出错可自动恢复。
               </p>
               <p>
-                业务场景已交付：招聘、运营预警、合同审核、客户画像、项目管理、会议纪要、专利知识库等 AI 应用，能根据实际效果选型（专利检索准确率从约 60% 提升至 95%+）。
-              </p>
-              <p>
-                IT 管理背景是差异化优势：熟悉 ERP / OA / CRM 与跨部门数据打通、网络安全与等保 2.0 三级、ICP / 大模型登记 / 算法备案，能让 AI 真正接入企业系统并合规上线。带过 5 人 IT 团队 + 多地外包，沉淀 25+ 份 SOP，面试 AI Agent 工程师 10+ 场。
+                已交付招聘、运营预警、合同审核、客户画像、项目管理、会议纪要、专利知识库等 AI 应用。IT 管理背景是差异化优势：熟悉 ERP / OA / CRM 与跨部门数据打通、等保 2.0 三级与 AI 合规备案，带过 5 人团队 + 多地外包。
               </p>
             </div>
 

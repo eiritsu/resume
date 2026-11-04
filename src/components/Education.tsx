@@ -10,19 +10,6 @@ const education = [
     period: '2018 - 2021',
     description: '专升本，系统学习计算机基础理论、数据结构、算法、操作系统、计算机网络、数据库原理等核心课程',
   },
-  {
-    id: 'sbs',
-    school: '上海商学院',
-    degree: '大专（全日制）',
-    major: '连锁经营与管理',
-    period: '2014 - 2017',
-    description: '全日制专科阶段，为后续专升本打下基础',
-  },
-]
-
-const certificates = [
-  { name: 'CCNA 思科认证网络工程师', year: '2020', icon: '🏆' },
-  { name: 'CET-4 大学英语四级', year: '2019', icon: '📜' },
 ]
 
 const languages = [
@@ -42,7 +29,7 @@ export function Education() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-title-1 md:text-display-3">教育背景与证书</h2>
+          <h2 className="text-title-1 md:text-display-3">教育经历与语言</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -85,36 +72,6 @@ export function Education() {
           </motion.div>
 
           <div className="space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h3 className="text-title-3 font-display font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center text-green-600 dark:text-green-400 text-xl" aria-hidden="true">🏆</span>
-                证书资质
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {certificates.map((cert, index) => (
-                  <motion.div
-                    key={cert.name}
-                    className="card p-6 text-center group"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -4 }}
-                  >
-                    <span className="text-4xl mb-3 block" aria-hidden="true">{cert.icon}</span>
-                    <h4 className="text-headline font-semibold text-gray-900 dark:text-white mb-1">{cert.name}</h4>
-                    <span className="text-caption-1 text-gray-500 dark:text-gray-400">{cert.year}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

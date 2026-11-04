@@ -109,8 +109,7 @@ const skillCategories = [
       '统一身份（飞书 SSO / LDAP / OIDC / OAuth2）',
       'AI Gateway（模型路由、SSE / WebSocket、API Key）',
       '额度分级继承与用量审计',
-      'Prometheus + Loki 可观测性',
-      'SQLite / Docker / Playwright 自动化测试',
+      'Prometheus + Loki / SQLite / Docker / Playwright',
     ],
   },
   {

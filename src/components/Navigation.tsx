@@ -7,7 +7,6 @@ const navItems = [
   { id: 'about', label: '关于我' },
   { id: 'skills', label: '核心技能' },
   { id: 'projects', label: '项目经历' },
-  { id: 'experience', label: '工作经历' },
   { id: 'education', label: '教育背景' },
 ]
 
